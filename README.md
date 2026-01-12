@@ -5,3 +5,4 @@ The Legion Of Code CS361 group repository.
 - Niki Pandya
 - Aron Meraz
 - Nolan Flores
+- Kevin Rubio
