@@ -8,3 +8,4 @@ The Legion Of Code CS361 group repository.
 - Kevin Rubio
 - Noah Letter
 - Alex Cortes
+- Nolan Cutler
