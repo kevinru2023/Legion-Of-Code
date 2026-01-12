@@ -6,3 +6,4 @@ The Legion Of Code CS361 group repository.
 - Aron Meraz
 - Nolan Flores
 - Kevin Rubio
+- Noah Letter
