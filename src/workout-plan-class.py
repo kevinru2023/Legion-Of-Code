@@ -23,3 +23,13 @@ class WorkoutPlan:
     # Will calculate if a rest day is needed in the user's current workout plan
     def calculate_rest_day(self):
         return None
+    
+    # Will calcuate which muslce groups are being undertrained or over trained
+    def calculate_muscle_group_balance(self) -> dict[str]:
+        return None
+    # Will return a dictionary mapping of muscle groups and their stats? 
+    # {
+    #     Chest: frequency : 2, last worked: Friday, underworked: False, overworked: False
+    #     Quads: frequency : 0, last worked: Monday, underworked: True, overworked: True
+    # }
+
