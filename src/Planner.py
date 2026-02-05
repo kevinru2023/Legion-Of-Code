@@ -36,13 +36,34 @@ Auth: Nolan Cutler
 Supports EP-WOP-01, UR-APT-03, UR-APT-02, UR-APT-01
 Collaborators: Workout[1]
 """
-@dataclass
+# @dataclass
 class Session:
+    '''
     id: int
     day: str
     notes: str
     percieved_intensity: int
     workout: Workout
+    '''
+
+    def __init__(self):
+        pass
+
+    def store_notes(self, notes):
+        pass
+    
+    def track_id(self, id):
+        return None
+    
+    def log_workout_day(self, day):
+        return None
+    
+    def workout_intensity(self, intensity):
+        return None
+    
+    def log_workout(self, workout):
+        return None
+        
 
 
 
