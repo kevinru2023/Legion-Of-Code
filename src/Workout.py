@@ -1,14 +1,16 @@
 """
 C-01: Class for Workout Plan
 Auth: Kevin Rubio, Aron Meraz
-Supports: EP-BRBS (have to rename later), (probalby supports other stuff)
-Collaborators: ???
+Supports: EP-BRBS
+Collaborators: Workout
 """
 
 
 class WorkoutPlan:
     def __init__(self):
-        self.workout_plan = {}  # Init an empty dict for workout plan where Keys = Day of the week and Values = workout (probably will be class)
+        self.workout_plan = (
+            {}
+        )  # Init an empty dict for workout plan where Keys = Day of the week and Values = workout (probably will be class)
         self.last_rest_day = None  # date of last rest day taken
         self.current_streak = 0  # Days workouted in a row
 
@@ -23,11 +25,12 @@ class WorkoutPlan:
     # Will calculate if a rest day is needed in the user's current workout plan
     def calculate_rest_day(self):
         return None
-    
+
     # Will calcuate which muslce groups are being undertrained or over trained
     def calculate_muscle_group_balance(self) -> dict[str]:
         return None
-    # Will return a dictionary mapping of muscle groups and their stats? 
+
+    # Will return a dictionary mapping of muscle groups and their stats?
     # {
     #     Chest: frequency : 2, last worked: Friday, underworked: False, overworked: False
     #     Quads: frequency : 0, last worked: Monday, underworked: True, overworked: True
@@ -35,25 +38,39 @@ class WorkoutPlan:
 
 
 """
-C-01: Suggestion Engine
+C-02: Suggestion Engine
 Auth: Kevin Rubio, Aron Meraz
 Supports: EP-BRBS, (maybe more)
-Collaborators: WorkoutPlan ? 
+Collaborators: WorkoutPlan 
 """
-class SuggestionEngine: 
+
+
+class SuggestionEngine:
     # will generate suggestions by analyzing workout plans
 
     def __init__(self):
-        "Empty for now"
+        # Empty for now
         pass
-
 
     def suggest_rest_day(self, workoutplan) -> str:
-        #Will determin if rest is needed based on workout streak
-        pass
-    
-    
-    def suggest_muscle_group(self, workoutplan) -> str:
-        #Will determine which muscle groups should be worked next based on their frequency and last day worked
+        # Will determin if rest is needed based on workout streak
         pass
 
+    def suggest_muscle_group(self, workoutplan) -> str:
+        # Will determine which muscle groups should be worked next based on their frequency and last day worked
+        pass
+
+
+"""
+C-03: Workout
+Auth: Nolan Cutler
+Supports: EP-BRBS
+Collaborators: None
+"""
+
+
+@dataclass
+class Workout:
+    name: str
+    intensity: int
+    bodypart: str
