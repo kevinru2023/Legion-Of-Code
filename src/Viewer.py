@@ -1,7 +1,7 @@
 """
 C-06: Viewer
 Auth: Nolan Cutler
-Supports EP-WOP-01
+Supports EP-WOP-01, UR-IID-01, UR-APT-03, UR-APT-02, UR-APT-01
 Collaborators: Planner[1] 
 """
 class Viewer:
@@ -55,7 +55,7 @@ class Viewer:
     # note: this will entail viewing videos, which will likely
     # need to be stored remotely
     def _select_plan_gui(self) -> None:
-        # display plans for selection
+        # let user select plan 
 
     # note: this will entail viewing videos, which will likely
     # need to be stored remotely
@@ -65,6 +65,6 @@ class Viewer:
     def _log_workout_gui(self) -> Session:
         # display gui for constructing workout session
 
-    def _create_gui(self) -> WorkoutPlan:
+    def _create_plan_gui(self) -> WorkoutPlan:
         # display gui for creating a WorkoutPlan
 
