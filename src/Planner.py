@@ -18,6 +18,9 @@ class Planner:
 
         self._plans.append(plan)
 
+    def remove_plan(self, id: int) -> bool:
+        # remove plan from plans and return True if succesful
+
     def list_plans(self) -> list[WorkoutPlan]:
         return self._plans
 

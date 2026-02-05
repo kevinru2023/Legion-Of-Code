@@ -6,6 +6,7 @@ Collaborators: Workout[0..7] (since there is 7 days in the week)
 """
 class WorkoutPlan:
     def __init__(self):
+        self.id = # some random num
         self._workout_plan = (
             {}
         )  # Init an empty dict for workout plan where Keys = Day of the week and Values = workout (probably will be class)
