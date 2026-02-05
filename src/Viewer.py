@@ -4,6 +4,10 @@ Supports EP-WOP-01
 Collaborators: Session, Planner, WorkoutPlan
 """
 class Viewer:
+    """
+    This will probably exist in the frontend in some ohter language/framework; this 
+    "code" is just a tentative outline for the structure of how that class will be implemented.
+    """
     def __init__(self, ...):
         # set config (darkmode, layout, etc)...
 
@@ -35,7 +39,7 @@ class Viewer:
         plans = self.planner.list_plans()
         
         # display all plans for selection
-        _select_gui(plans)
+        return _select_gui(plans)
 
     # note: this will entail viewing videos, which will likely
     # need to be stored remotely

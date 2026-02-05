@@ -15,7 +15,7 @@ class Planner:
 
     def add_plan(self, plan: WorkoutPlan) -> None:
         # validate workout and store in WorkOut plans
-        plan.validate()
+        plan.validate() # or something similar
 
         Planner.plans.append(plan)
 
