@@ -2,17 +2,17 @@
 C-01: Class for Workout Plan
 Auth: Kevin Rubio, Aron Meraz
 Supports: EP-BRBS
-Collaborators: Workout
+Collaborators: Workout[0..7] (since there is 7 days in the week)
 """
 
 
 class WorkoutPlan:
     def __init__(self):
-        self.workout_plan = (
+        self._workout_plan = (
             {}
         )  # Init an empty dict for workout plan where Keys = Day of the week and Values = workout (probably will be class)
-        self.last_rest_day = None  # date of last rest day taken
-        self.current_streak = 0  # Days workouted in a row
+        self._last_rest_day = None  # date of last rest day taken
+        self._current_streak = 0  # Days workouted in a row
 
     # Returns true if the workout plan is empty
     def workout_plan_empty(self):
@@ -41,7 +41,7 @@ class WorkoutPlan:
 C-02: Suggestion Engine
 Auth: Kevin Rubio, Aron Meraz
 Supports: EP-BRBS, (maybe more)
-Collaborators: WorkoutPlan 
+Collaborators: None
 """
 
 
@@ -72,5 +72,7 @@ Collaborators: None
 @dataclass
 class Workout:
     name: str
-    intensity: int
-    bodypart: str
+    sets: int
+    reps: int
+    rest_time: int
+
