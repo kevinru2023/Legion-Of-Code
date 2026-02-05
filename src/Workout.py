@@ -2,7 +2,7 @@
 C-01: Class for Workout Plan
 Auth: Kevin Rubio, Aron Meraz
 Supports: EP-BRBS
-Collaborators: ???
+Collaborators: Workout
 """
 
 
@@ -38,7 +38,7 @@ class WorkoutPlan:
 
 
 """
-C-01: Suggestion Engine
+C-02: Suggestion Engine
 Auth: Kevin Rubio, Aron Meraz
 Supports: EP-BRBS, (maybe more)
 Collaborators: WorkoutPlan 
@@ -49,7 +49,7 @@ class SuggestionEngine:
     # will generate suggestions by analyzing workout plans
 
     def __init__(self):
-        "Empty for now"
+        # Empty for now
         pass
 
     def suggest_rest_day(self, workoutplan) -> str:
@@ -59,3 +59,18 @@ class SuggestionEngine:
     def suggest_muscle_group(self, workoutplan) -> str:
         # Will determine which muscle groups should be worked next based on their frequency and last day worked
         pass
+
+
+"""
+C-03: Workout
+Auth: Nolan Cutler
+Supports: EP-BRBS
+Collaborators: None
+"""
+
+
+@dataclass
+class Workout:
+    name: str
+    intensity: int
+    bodypart: str

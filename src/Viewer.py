@@ -1,4 +1,5 @@
 """
+C-06: Viewer
 Auth: Nolan Cutler
 Supports EP-WOP-01
 Collaborators: Session, Planner, WorkoutPlan

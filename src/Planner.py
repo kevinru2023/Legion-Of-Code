@@ -1,4 +1,5 @@
 """
+C-04: Planner
 Auth: Nolan Cutler
 Supports EP-WOP-01
 Collaborators: Session, WorkoutPlan
@@ -26,11 +27,17 @@ class Planner:
         Planner.log.append(session)
 
 """
+C-05
 Auth: Nolan Cutler
 Supports EP-WOP-01
-Collaborators: None
+Collaborators: Workout
 """
 @dataclass
 class Session:
-# member variables for single workout section (e.g. intensity, day of week, etc)
+    day: str
+    notes: str
+    percieved_intensity: int
+    workout: Workout
+
+
 
