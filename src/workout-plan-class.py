@@ -1,11 +1,9 @@
 """
 C-01: Class for Workout Plan
 Auth: Kevin Rubio, Aron Meraz
-Supports: EP-BRBS (have to rename later), (probalby supports other stuff)
+Supports: EP-BRBS 
 Collaborators: ???
 """
-
-
 class WorkoutPlan:
     def __init__(self):
         self.workout_plan = {}  # Init an empty dict for workout plan where Keys = Day of the week and Values = workout (probably will be class)
@@ -38,7 +36,7 @@ class WorkoutPlan:
 C-01: Suggestion Engine
 Auth: Kevin Rubio, Aron Meraz
 Supports: EP-BRBS, (maybe more)
-Collaborators: WorkoutPlan ? 
+Collaborators: WorkoutPlan 
 """
 class SuggestionEngine: 
     # will generate suggestions by analyzing workout plans
