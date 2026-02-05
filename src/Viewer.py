@@ -9,11 +9,10 @@ class Viewer:
     This will probably exist in the frontend in some ohter language/framework; this 
     "code" is just a tentative outline for the structure of how that class will be implemented.
     """
-    def __init__(self):
+    def __init__(self, planner: Planner):
         # set config (darkmode, layout, etc)...
+        self._planner = planner
 
-        self._planner = Planner()
-        
     def create_plan(self) -> None:
         # display workout plan editor and construct WorkoutPlan obj
         plan = _create_gui()
@@ -27,6 +26,9 @@ class Viewer:
 
         # display all plans in GUI
         _view_gui(plans)
+
+    def remove_plan(self):
+        # show gui for removing plan
 
     def log_workout(self) -> None:
         # display GUI for user to log workout and construct session object

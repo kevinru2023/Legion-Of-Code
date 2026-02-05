@@ -2,7 +2,7 @@
 C-07: User
 Auth: Niki Pandya
 Supports: UR-WP-01, UR-WP-02, UR-WP-03, UR-APT-01, UR-WOP-01
-Collaborators: WorkoutPlan, Session
+Collaborators: Planner[1]
 """
 
 class User:
@@ -12,7 +12,7 @@ class User:
         self._email = email
         self._planner = Planner()
 
-    def add_workout_plan(self, plan):
+    def add_workout_plan(self):
         self._planner.add_plan(plan)
 
     def remove_workout_plan(self, plan_id):

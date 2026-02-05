@@ -39,7 +39,7 @@ class WorkoutPlan:
 """
 C-02: Suggestion Engine
 Auth: Kevin Rubio, Aron Meraz
-Supports: EP-BRBS,  EP-WOP-01, UR-BRBS
+Supports: EP-BRBS,  EP-WOP-01 
 Collaborators: None
 """
 class SuggestionEngine:
