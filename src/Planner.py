@@ -33,10 +33,4 @@ Collaborators: None
 @dataclass
 class Session:
 # member variables for single workout section (e.g. intensity, day of week, etc)
-    
-
-
-    
-
-
 
