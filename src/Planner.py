@@ -1,7 +1,7 @@
 """
 C-04: Planner
 Auth: Nolan Cutler
-Supports EP-WOP-01
+Supports EP-WOP-01, UR-APT-03, UR-APT-02, UR-APT-01, UR-BRBS
 Collaborators: WorkoutPlan[0..*], Session [0..*] 
 """
 class Planner:
@@ -33,7 +33,7 @@ class Planner:
 """
 C-05
 Auth: Nolan Cutler
-Supports EP-WOP-01
+Supports EP-WOP-01, UR-APT-03, UR-APT-02, UR-APT-01
 Collaborators: Workout[1]
 """
 @dataclass

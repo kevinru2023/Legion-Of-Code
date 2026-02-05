@@ -1,11 +1,9 @@
 """
 C-01: Class for Workout Plan
 Auth: Kevin Rubio, Aron Meraz
-Supports: EP-BRBS
+Supports: EP-BRBS, EP-WOP, UR-WP-01, UR-WP-02, UR-WP-03
 Collaborators: Workout[0..7] (since there is 7 days in the week)
 """
-
-
 class WorkoutPlan:
     def __init__(self):
         self._workout_plan = (
@@ -40,11 +38,9 @@ class WorkoutPlan:
 """
 C-02: Suggestion Engine
 Auth: Kevin Rubio, Aron Meraz
-Supports: EP-BRBS, (maybe more)
+Supports: EP-BRBS,  EP-WOP-01, UR-BRBS
 Collaborators: None
 """
-
-
 class SuggestionEngine:
     # will generate suggestions by analyzing workout plans
 
@@ -64,11 +60,9 @@ class SuggestionEngine:
 """
 C-03: Workout
 Auth: Nolan Cutler
-Supports: EP-BRBS
+Supports: EP-BRBS, UR-W0P-01
 Collaborators: None
 """
-
-
 @dataclass
 class Workout:
     name: str
