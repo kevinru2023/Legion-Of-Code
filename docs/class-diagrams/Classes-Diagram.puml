@@ -1,0 +1,38 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+package "Workout Planning & Tracking System" {
+    class User
+    class Planner
+    class Viewer
+    class WorkoutPlan
+    class Workout
+    class Session
+    class SuggestionEngine
+    class WorkoutHistoryManager
+    class ProgressAnalyzer
+
+    User --> Planner
+    Viewer --> Planner
+
+    Planner --> WorkoutPlan
+    Planner --> Workout
+    Planner --> Session
+
+    WorkoutPlan --> Workout
+    WorkoutPlan --> Session
+
+    Session --> Workout
+
+    SuggestionEngine --> WorkoutPlan
+
+    WorkoutHistoryManager --> Planner
+    WorkoutHistoryManager --> Session
+
+    ProgressAnalyzer --> Session
+    ProgressAnalyzer --> Planner
+    ProgressAnalyzer --> User
+}
+
+@enduml
