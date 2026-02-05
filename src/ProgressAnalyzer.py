@@ -4,19 +4,33 @@ Auth: Alex Cortes
 Supports: UR-APT-03, UR-APT-02, UR-APT-01
 Collaborators: Session [...], Planner[...], User[...]
 """
+
+from Planner import Session, Planner
+from Workout import Workout, WorkoutPlan
+from User import User
+
 class ProgressAnalyzer:
     """
     Primary Purpose: Manages the calculation of statistics and tracking of progress.
     """
     
-    def __init__(self, sessions=None, date_range):
-        self.sessions = sessions or []  #list of workouts
+    def __init__(self, sessions=None, date_range=None, user=None, planner=None):
+        if user:
+            self.sessions = user.get_sessions()
+        elif planner:
+            self.sessions = planner.get_logs()
+        else:
+            self.sessions = sessions # list of Session objects
         self.stats = {}
-        self.date_range = () # Tuple
+        self.date_range = ()  # Tuple (start_date, end_date)
     
     # Basic statistics
     def calculate_stats(self):
-        avg_per_week = len(self.sessions) / 5  # Simplified calculation
+        total = len(self.sessions)
+        if not self.sessions:
+            avg_per_week = 0
+            streak = 0
+            
         return {
             "total_workouts": total,
             "avg_per_week": avg_per_week,
@@ -25,8 +39,6 @@ class ProgressAnalyzer:
     
     def weekly_stats(self, weeks=4):
         weekly_data = []
-        
-        # Simplified: Return placeholder data
         for i in range(weeks):
             weekly_data.append
                 ({
@@ -37,19 +49,21 @@ class ProgressAnalyzer:
         return weekly_data
     
     # Progress tracking
-    def imrpovement_insights(self):
+    def improvement_insights(self):
         insights = []
-        # default insight
         if len(self.sessions) < 3:
             insights.append("Log more workouts for better analysis")
+        
+        # TODO: add default insights for higher amounts of sessions.
         
         return insights
     
     def generate_report(self):
         """
-        Generate comprehensive progress report.
+        Generate comprehensive progress report
         """
         return {
-            "basic_stats": self.basic_stats(),
-            "improvement_areas": self.imrpovement_insights(),
+            "basic_stats": self.calculate_stats(),
+            "weekly_stats": self.weekly_stats(),
+            "improvement_areas": self.improvement_insights(),
         }
