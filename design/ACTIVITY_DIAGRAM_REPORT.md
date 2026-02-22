@@ -1,95 +1,186 @@
-# CP Assignment #6 – Activity Diagram Report
+# CS 361: SOFTWARE ENGINEERING I – Winter Term-2026  
+Instructor: Associate Professor Raffaele De Amicis  
 
-This document contains UML Activity Diagrams derived from User Acceptance Test (UAT) scenarios.  
-Each diagram models system behaviour, user interactions, validation logic, decision paths, and alternate flows.
+# CP-Assignment #7 – Detailed Activity Diagram Design Document  
 
-----------------------------------------------------------------
-## AD-01 – (To be completed)
-Related UAT Test Case: TC-01
+Title: Customisable Workout Plan Management System  
+Date: 22 February 2026  
+Created by: [Team Name]  
 
-Purpose:
-(To be completed)
+Designer: [Student Name Surname]  
+Reviewer: [Student Name Surname]  
 
-----------------------------------------------------------------
-## AD-02 – Edit Workout Plan
-Related UAT Test Case: TC-02 Edit Workout Plan
-
-Purpose:
-This diagram illustrates the workflow for editing an existing workout plan. The user logs into the system, navigates to stored workout plans, and selects a plan to modify. The system loads the plan and allows the user to edit exercise parameters such as sets and repetitions. The system validates the input before saving changes. Valid updates are stored in the database, while invalid inputs trigger validation errors and prevent data updates.
-
-Key Behaviours Modeled:
-- User interaction with stored plans
-- System validation logic
-- Decision paths for valid vs invalid input
-- Database update process
-- Alternate error flow
+This document contains detailed UML Activity Diagrams derived from User Acceptance Test (UAT) scenarios.  
+Each diagram specifies system behaviour, user interactions, validation logic, decision points, alternate flows, and related traceability to epics, user stories, and test cases.
 
 ----------------------------------------------------------------
-## AD-03 – (To be completed)
-Related UAT Test Case: TC-03
+## Activity Diagram ID: AD-01 – (To be completed)
 
-Purpose:
-(To be completed)
+Activity Diagram Title: (To be completed)
 
-----------------------------------------------------------------
-## AD-04 – Prevent Starting Empty Workout Plan
-Related UAT Test Case: TC-04 Prevent Starting Empty Workout Plan
+Related Epic: (To be completed)  
+Related User Story(ies): (To be completed)  
+Related Test Case(s): TC-01  
+Related Test Case Title: (To be completed)  
+Related Test Case Objective(s): (To be completed)  
 
-Purpose:
-This activity diagram models the validation process executed when a user attempts to start a workout. After selecting a workout plan, the system checks whether the plan contains exercises. If exercises exist, the system creates a workout session and loads exercises. If no exercises are found, the system blocks the workflow, displays an error message, and redirects the user back to editing. This diagram emphasises defensive system behaviour and error prevention.
+Activity Diagram:
+- [Insert rendered UML Activity Diagram here]
+- [Insert GitHub link to PlantUML (.puml) file]
 
-Key Behaviours Modeled:
-- Precondition validation
-- Decision-based control flow
-- Session creation logic
-- Alternate error handling path
-- User recovery flow
+Notes & Assumptions:
+- None
 
-----------------------------------------------------------------
-## AD-05 – Organising Workouts by Day
-Related UAT Test Case: TC-05 Organising Workouts by Day
-
-Purpose:
-This diagram represents how users schedule workout plans by assigning them to specific days of the week. The system loads existing plans, the user selects a plan, and chooses a day. The system validates scheduling constraints before persisting changes. Valid schedules update the dashboard, while invalid configurations trigger scheduling errors. The diagram captures both normal and exception flows.
-
-Key Behaviours Modeled:
-- Dashboard interaction
-- Scheduling workflow
-- Validation rules
-- Database persistence
-- Alternate validation failure flow
+Feedback & Revisions:
+- Feedback from: (To be completed)
+- Revision Date: (To be completed)
+- Changes Made: (To be completed)
 
 ----------------------------------------------------------------
-## AD-06 – (To be completed)
-Related UAT Test Case: TC-06
+## Activity Diagram ID: AD-02 – Edit Workout Plan
 
-Purpose:
-(To be completed)
+Activity Diagram Title: Edit Workout Plan
+
+Related Epic: Workout Plan Management  
+Related User Story(ies):
+- As a user, I want to edit an existing workout plan so that I can modify exercises, sets, and repetitions.
+
+Related Test Case(s): TC-02  
+Related Test Case Title: Edit Workout Plan  
+Related Test Case Objective(s):
+- Verify that a user can successfully edit an existing workout plan.
+- Ensure system validation prevents invalid input values.
+- Confirm valid changes are persisted in the database.
+
+Activity Diagram Description:
+This activity diagram illustrates the workflow for editing an existing workout plan. The user logs into the system, navigates to stored workout plans, and selects a plan to modify. The system loads the plan and allows the user to edit exercise parameters such as sets and repetitions. The system validates the input before saving changes. Valid updates are stored in the database, while invalid inputs trigger validation errors and prevent data updates.
+
+Activity Diagram:
+- [Insert rendered UML Activity Diagram here]
+- [Insert GitHub link to PlantUML (.puml) file]
+
+Notes & Assumptions:
+- Assumes user is authenticated before editing.
+- Validation rules include non-negative numeric values and required fields.
+
+Feedback & Revisions:
+- Feedback from: (To be completed)
+- Revision Date: (To be completed)
+- Changes Made: (To be completed)
 
 ----------------------------------------------------------------
-## AD-07 – (To be completed)
-Related UAT Test Case: TC-07
+## Activity Diagram ID: AD-03 – (To be completed)
 
-Purpose:
-(To be completed)
+Activity Diagram Title: (To be completed)
+
+Related Epic: (To be completed)  
+Related User Story(ies): (To be completed)  
+Related Test Case(s): TC-03  
+Related Test Case Title: (To be completed)  
+Related Test Case Objective(s): (To be completed)  
+
+Activity Diagram:
+- [Insert rendered UML Activity Diagram here]
+- [Insert GitHub link to PlantUML (.puml) file]
+
+Notes & Assumptions:
+- None
+
+Feedback & Revisions:
+- Feedback from: (To be completed)
+- Revision Date: (To be completed)
+- Changes Made: (To be completed)
 
 ----------------------------------------------------------------
-## AD-08 – (To be completed)
-Related UAT Test Case: TC-08
+## Activity Diagram ID: AD-04 – Prevent Starting Empty Workout Plan
 
-Purpose:
-(To be completed)
+Activity Diagram Title: Prevent Starting Empty Workout Plan
+
+Related Epic: Workout Session Management  
+Related User Story(ies):
+- As a user, I want the system to prevent me from starting a workout plan that contains no exercises.
+
+Related Test Case(s): TC-04  
+Related Test Case Title: Prevent Starting Empty Workout Plan  
+Related Test Case Objective(s):
+- Ensure the system validates that a workout plan contains exercises before starting.
+- Verify that the system blocks session creation if no exercises exist.
+- Confirm appropriate error messaging is displayed.
+
+Activity Diagram Description:
+This activity diagram models the validation process executed when a user attempts to start a workout. After selecting a workout plan, the system checks whether the plan contains exercises. If exercises exist, the system creates a workout session and loads exercises. If no exercises are found, the system blocks the workflow, displays an error message, and redirects the user back to editing.
+
+Activity Diagram:
+- [Insert rendered UML Activity Diagram here]
+- [Insert GitHub link to PlantUML (.puml) file]
+
+Notes & Assumptions:
+- Assumes workout plans are stored prior to session start.
+- System enforces at least one exercise as a precondition.
+
+Feedback & Revisions:
+- Feedback from: (To be completed)
+- Revision Date: (To be completed)
+- Changes Made: (To be completed)
 
 ----------------------------------------------------------------
-## AD-09 – (To be completed)
-Related UAT Test Case: TC-09
+## Activity Diagram ID: AD-05 – Organising Workouts by Day
 
-Purpose:
-(To be completed)
+Activity Diagram Title: Organising Workouts by Day
+
+Related Epic: Workout Scheduling  
+Related User Story(ies):
+- As a user, I want to assign workout plans to specific days of the week so that I can organise my weekly training schedule.
+
+Related Test Case(s): TC-05  
+Related Test Case Title: Organising Workouts by Day  
+Related Test Case Objective(s):
+- Verify that users can assign workout plans to specific days.
+- Ensure scheduling constraints are validated.
+- Confirm dashboard updates reflect saved schedules.
+
+Activity Diagram Description:
+This diagram represents how users schedule workout plans by assigning them to specific days of the week. The system loads existing plans, the user selects a plan, and chooses a day. The system validates scheduling constraints before persisting changes. Valid schedules update the dashboard, while invalid configurations trigger scheduling errors.
+
+Activity Diagram:
+- [Insert rendered UML Activity Diagram here]
+- [Insert GitHub link to PlantUML (.puml) file]
+
+Notes & Assumptions:
+- Each day may have configurable constraints.
+- System prevents duplicate scheduling conflicts.
+
+Feedback & Revisions:
+- Feedback from: (To be completed)
+- Revision Date: (To be completed)
+- Changes Made: (To be completed)
 
 ----------------------------------------------------------------
-## AD-10 – (To be completed)
-Related UAT Test Case: TC-10
+## Activity Diagram ID: AD-06 – (To be completed)
 
-Purpose:
-(To be completed)
+Related Test Case(s): TC-06  
+Purpose: (To be completed)
+
+----------------------------------------------------------------
+## Activity Diagram ID: AD-07 – (To be completed)
+
+Related Test Case(s): TC-07  
+Purpose: (To be completed)
+
+----------------------------------------------------------------
+## Activity Diagram ID: AD-08 – (To be completed)
+
+Related Test Case(s): TC-08  
+Purpose: (To be completed)
+
+----------------------------------------------------------------
+## Activity Diagram ID: AD-09 – (To be completed)
+
+Related Test Case(s): TC-09  
+Purpose: (To be completed)
+
+----------------------------------------------------------------
+## Activity Diagram ID: AD-10 – (To be completed)
+
+Related Test Case(s): TC-10  
+Purpose: (To be completed)
