@@ -158,7 +158,8 @@ Activity Diagram Description: This diagram shows the suggestions flow triggers w
 https://github.com/CS361-2026-Winter-Term/Legion-Of-Code/blob/main/design/activity-diagrams/AD-08_Muscle_Group_suggestion.puml 
 
 ----------------------------------------------------------------
-## Activity Diagram ID: AD-09 - Statistics from Workout History
+## Activity Diagram ID: AD-09 - Workout Statistics
+
 Activity Diagram Description: Activity Diagram 09 documents the flow of how a user would view and interact with their workout statistics. It shows the correlation between user actions and system calculations for progress tracking.
 
 Related Epic: EP-APT (Activity & Progress Tracking) 
@@ -173,6 +174,7 @@ Related Test Case Objective(s): Validate the calculations of statistics from the
 
 Activity Diagram: 
 - ![TC-09 Statistics from Workout History](https://github.com/CS361-2026-Winter-Term/Legion-Of-Code/blob/main/design/activity-diagrams/TC-09%20Statistics%20from%20Workout%20History.png)
+- 
 Notes & Assumptions: 
 - The diagram assumes that with each workout being logged, the system has a cache invalidation system. This means that any update to user data (whether its from the system or the user) will recalculate the basic statistics to show the user 
 - The user being able to log workouts assumes that the system processes correctly stores the data for it to be used in the calculating statistics. 
