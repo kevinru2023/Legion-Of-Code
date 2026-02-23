@@ -141,10 +141,30 @@ Related Test Case(s): TC-06
 Purpose: (To be completed)
 
 ----------------------------------------------------------------
-## Activity Diagram ID: AD-07 – (To be completed)
+## Activity Diagram ID: AD-07
 
-Related Test Case(s): TC-07  
-Purpose: (To be completed)
+Activity Diagram Title: Rest day Suggestion
+
+Related Epic: EP-BRBS, EP-WP 
+Related User Story(ies): UR-BRBS-01  
+Related Test Case(s): TC-01  
+Related Test Case Title: Rest day suggestion  
+Related Test Case Objective(s): Ensure that the system will suggest a rest day when users go to add another workout after 6 consecutive days of logging a workout.  
+
+Activity Diagram:
+- ![TC-07 Rest Day Suggestion](activity-diagrams/TC-07%20Rest%20Day%20Suggestion.png)
+-<https://github.com/CS361-2026-Winter-Term/Legion-Of-Code/blob/main/design/activity-diagrams/AD-07_Rest_Day_Suggestion.puml>
+
+Notes & Assumptions:
+
+- Note 1 (if applicable): TC-07 does not mention where the workout counter is going to be stored (i.e. local or in DB) 
+- Assumption 1 (if applicable): This AD assumes the user already has a set workout plan
+
+Feedback & Revisions:
+
+- Feedback from [Team Member/Reviewer Name]: Aron Meraz  
+- Revision Date: 02/22/26
+- Changes Made: Fixed an issue with the conditional logic flow to include a Yes section.  
 
 ----------------------------------------------------------------
 ## Activity Diagram ID: AD-08 – (To be completed)
