@@ -174,7 +174,8 @@ Related Test Case Objective(s): Validate the calculations of statistics from the
 
 Activity Diagram: 
 - ![TC-09 Statistics from Workout History](https://github.com/CS361-2026-Winter-Term/Legion-Of-Code/blob/main/design/activity-diagrams/TC-09%20Statistics%20from%20Workout%20History.png)
-- 
+- https://github.com/CS361-2026-Winter-Term/Legion-Of-Code/blob/main/design/activity-diagrams/AD-09_Workout_Statistics.puml
+
 Notes & Assumptions: 
 - The diagram assumes that with each workout being logged, the system has a cache invalidation system. This means that any update to user data (whether its from the system or the user) will recalculate the basic statistics to show the user 
 - The user being able to log workouts assumes that the system processes correctly stores the data for it to be used in the calculating statistics. 
