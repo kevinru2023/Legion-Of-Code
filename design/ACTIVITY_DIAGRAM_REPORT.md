@@ -43,7 +43,7 @@ Activity Diagram Title: Edit Workout Plan
 
 Related Epic: Workout Plan Management  
 Related User Story(ies): UR-WP-02 
-Related Test Case(s): TC-02  
+Related Test Case(s): TC-02, TC-06, TC-03
 Related Test Case Title: Edit Workout Plan  
 Related Test Case Objective(s):
 Verify that the user can successfully edit an existing workout plan and that changes are saved correctly without creating duplicate plans. 
@@ -96,7 +96,7 @@ Related Epic: Workout Session Management
 Related User Story(ies):
 - As a user, I want the system to prevent me from starting a workout plan that contains no exercises.
 
-Related Test Case(s): TC-04  
+Related Test Case(s): TC-04, TC-07
 Related Test Case Title: Prevent Starting Empty Workout Plan  
 Related Test Case Objective(s): 
 Verify that the system prevents users from starting a workout plan that contains no exercises.
@@ -126,7 +126,7 @@ Related Epic: Workout Scheduling
 Related User Story(ies):
 - As a user, I want to assign workout plans to specific days of the week so that I can organise my weekly training schedule.
 
-Related Test Case(s): TC-05  
+Related Test Case(s): TC-05, TC-08, TC-09
 Related Test Case Title: Organising Workouts by Day  
 Related Test Case Objective(s): 
 Ensure that users can assign workout plans to specific days and that the dashboard reflects the scheduled workout correctly.
