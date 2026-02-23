@@ -107,8 +107,8 @@ Related Test Case Title: Rest day suggestion
 Related Test Case Objective(s): Ensure that the system will suggest a rest day when users go to add another workout after 6 consecutive days of logging a workout.  
 
 Activity Diagram:
-- ![TC-07 Rest Day Suggestion](activity-diagrams/TC-07%20Rest%20Day%20Suggestion.png)
--<https://github.com/CS361-2026-Winter-Term/Legion-Of-Code/blob/main/design/activity-diagrams/AD-07_Rest_Day_Suggestion.puml>
+- ![AD-07 Rest Day Suggestion](https://github.com/CS361-2026-Winter-Term/Legion-Of-Code/blob/main/design/activity-diagrams/TC-07_Rest_Day_Suggestion.png?raw=1)
+- https://github.com/CS361-2026-Winter-Term/Legion-Of-Code/blob/main/design/activity-diagrams/AD-07_Rest_Day_Suggestion.puml
 
 Notes & Assumptions:
 
