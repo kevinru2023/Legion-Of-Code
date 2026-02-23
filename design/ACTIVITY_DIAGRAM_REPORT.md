@@ -1,29 +1,6 @@
 # CS 361: SOFTWARE ENGINEERING I – Winter Term-2026  
 
 ----------------------------------------------------------------
-## Activity Diagram ID: AD-01 – (To be completed)
-
-Activity Diagram Title: (To be completed)
-
-Related Epic: (To be completed)  
-Related User Story(ies): (To be completed)  
-Related Test Case(s): TC-01  
-Related Test Case Title: (To be completed)  
-Related Test Case Objective(s): (To be completed)  
-
-Activity Diagram:
-- [Insert rendered UML Activity Diagram here]
-- [Insert GitHub link to PlantUML (.puml) file]
-
-Notes & Assumptions:
-- None
-
-Feedback & Revisions:
-- Feedback from: (To be completed)
-- Revision Date: (To be completed)
-- Changes Made: (To be completed)
-
-----------------------------------------------------------------
 ## Activity Diagram ID: AD-02 – Edit Workout Plan
 
 Activity Diagram Title: Edit Workout Plan
@@ -183,12 +160,6 @@ Activity Diagram Description: This diagram shows the suggestions flow triggers w
 <img width="1735" height="1048" alt="AD-08_Muscle_Group_suggestion" src="https://github.com/user-attachments/assets/d2db5331-4a93-4fb7-ad99-c2bf0e86df77" />
 
 https://github.com/CS361-2026-Winter-Term/Legion-Of-Code/blob/main/design/activity-diagrams/AD-08_Muscle_Group_suggestion.puml 
-
-----------------------------------------------------------------
-## Activity Diagram ID: AD-09 – (To be completed)
-
-Related Test Case(s): TC-09  
-Purpose: (To be completed)
 
 ----------------------------------------------------------------
 ## Activity Diagram ID: AD-10 – View Exercise Videos
