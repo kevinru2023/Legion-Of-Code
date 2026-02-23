@@ -1,17 +1,4 @@
 # CS 361: SOFTWARE ENGINEERING I – Winter Term-2026  
-Instructor: Associate Professor Raffaele De Amicis  
-
-# CP-Assignment #7 – Detailed Activity Diagram Design Document  
-
-Title: Customisable Workout Plan Management System  
-Date: 22 February 2026  
-Created by: [Team Name]  
-
-Designer: [Student Name Surname]  
-Reviewer: [Student Name Surname]  
-
-This document contains detailed UML Activity Diagrams derived from User Acceptance Test (UAT) scenarios.  
-Each diagram specifies system behaviour, user interactions, validation logic, decision points, alternate flows, and related traceability to epics, user stories, and test cases.
 
 ----------------------------------------------------------------
 ## Activity Diagram ID: AD-01 – (To be completed)
