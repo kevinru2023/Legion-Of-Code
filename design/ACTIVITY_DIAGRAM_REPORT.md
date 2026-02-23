@@ -56,8 +56,8 @@ Activity Diagram Description:
 This activity diagram illustrates the workflow for editing an existing workout plan. The user logs into the system, navigates to stored workout plans, and selects a plan to modify. The system loads the plan and allows the user to edit exercise parameters such as sets and repetitions. The system validates the input before saving changes. Valid updates are stored in the database, while invalid inputs trigger validation errors and prevent data updates.
 
 Activity Diagram:
-- [Insert rendered UML Activity Diagram here]
-- [Insert GitHub link to PlantUML (.puml) file]
+- <img width="653" height="715" alt="image" src="https://github.com/user-attachments/assets/109c05b8-d070-4bab-a205-f031f02b4d49" />
+- https://github.com/CS361-2026-Winter-Term/Legion-Of-Code/blob/836dfc5679a053bd29dca2fa8ae3a2faccaa360a/design/activity-diagrams/AD-02_Edit_Workout_Plan.puml
 
 Notes & Assumptions:
 - Assumes user is authenticated before editing.
@@ -111,9 +111,9 @@ Activity Diagram Description:
 This activity diagram models the validation process executed when a user attempts to start a workout. After selecting a workout plan, the system checks whether the plan contains exercises. If exercises exist, the system creates a workout session and loads exercises. If no exercises are found, the system blocks the workflow, displays an error message, and redirects the user back to editing.
 
 Activity Diagram:
-- [Insert rendered UML Activity Diagram here]
-- [Insert GitHub link to PlantUML (.puml) file]
-
+- <img width="598" height="621" alt="image" src="https://github.com/user-attachments/assets/04ac0415-2c87-4b38-9f59-c56b03a3c101" />
+- https://github.com/CS361-2026-Winter-Term/Legion-Of-Code/blob/836dfc5679a053bd29dca2fa8ae3a2faccaa360a/design/activity-diagrams/AD-04_Start_Workout_Validation.puml
+  
 Notes & Assumptions:
 - Assumes workout plans are stored prior to session start.
 - System enforces at least one exercise as a precondition.
@@ -143,8 +143,8 @@ Activity Diagram Description:
 This diagram represents how users schedule workout plans by assigning them to specific days of the week. The system loads existing plans, the user selects a plan, and chooses a day. The system validates scheduling constraints before persisting changes. Valid schedules update the dashboard, while invalid configurations trigger scheduling errors.
 
 Activity Diagram:
-- [Insert rendered UML Activity Diagram here]
-- [Insert GitHub link to PlantUML (.puml) file]
+- <img width="596" height="715" alt="image" src="https://github.com/user-attachments/assets/151ca77e-1dbd-4c5f-b5f0-cdd7cd95125e" />
+- https://github.com/CS361-2026-Winter-Term/Legion-Of-Code/blob/836dfc5679a053bd29dca2fa8ae3a2faccaa360a/design/activity-diagrams/AD-05_Assign_Workout_Day.puml
 
 Notes & Assumptions:
 - Each day may have configurable constraints.
