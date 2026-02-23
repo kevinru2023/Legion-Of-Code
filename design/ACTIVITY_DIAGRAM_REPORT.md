@@ -42,15 +42,11 @@ Feedback & Revisions:
 Activity Diagram Title: Edit Workout Plan
 
 Related Epic: Workout Plan Management  
-Related User Story(ies):
-- As a user, I want to edit an existing workout plan so that I can modify exercises, sets, and repetitions.
-
+Related User Story(ies): UR-WP-02 
 Related Test Case(s): TC-02  
 Related Test Case Title: Edit Workout Plan  
 Related Test Case Objective(s):
-- Verify that a user can successfully edit an existing workout plan.
-- Ensure system validation prevents invalid input values.
-- Confirm valid changes are persisted in the database.
+Verify that the user can successfully edit an existing workout plan and that changes are saved correctly without creating duplicate plans. 
 
 Activity Diagram Description:
 This activity diagram illustrates the workflow for editing an existing workout plan. The user logs into the system, navigates to stored workout plans, and selects a plan to modify. The system loads the plan and allows the user to edit exercise parameters such as sets and repetitions. The system validates the input before saving changes. Valid updates are stored in the database, while invalid inputs trigger validation errors and prevent data updates.
@@ -102,10 +98,8 @@ Related User Story(ies):
 
 Related Test Case(s): TC-04  
 Related Test Case Title: Prevent Starting Empty Workout Plan  
-Related Test Case Objective(s):
-- Ensure the system validates that a workout plan contains exercises before starting.
-- Verify that the system blocks session creation if no exercises exist.
-- Confirm appropriate error messaging is displayed.
+Related Test Case Objective(s): 
+Verify that the system prevents users from starting a workout plan that contains no exercises.
 
 Activity Diagram Description:
 This activity diagram models the validation process executed when a user attempts to start a workout. After selecting a workout plan, the system checks whether the plan contains exercises. If exercises exist, the system creates a workout session and loads exercises. If no exercises are found, the system blocks the workflow, displays an error message, and redirects the user back to editing.
@@ -134,10 +128,8 @@ Related User Story(ies):
 
 Related Test Case(s): TC-05  
 Related Test Case Title: Organising Workouts by Day  
-Related Test Case Objective(s):
-- Verify that users can assign workout plans to specific days.
-- Ensure scheduling constraints are validated.
-- Confirm dashboard updates reflect saved schedules.
+Related Test Case Objective(s): 
+Ensure that users can assign workout plans to specific days and that the dashboard reflects the scheduled workout correctly.
 
 Activity Diagram Description:
 This diagram represents how users schedule workout plans by assigning them to specific days of the week. The system loads existing plans, the user selects a plan, and chooses a day. The system validates scheduling constraints before persisting changes. Valid schedules update the dashboard, while invalid configurations trigger scheduling errors.
