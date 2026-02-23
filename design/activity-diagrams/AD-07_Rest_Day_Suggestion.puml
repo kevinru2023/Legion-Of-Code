@@ -12,7 +12,7 @@
 
 |System| 
 :Validates changes; 
-if (user has logged 6 days?)(Yes)
+if (user has logged 6 days?) then (Yes)
  :Move back workout plan by a day; 
  :Add rest day;
  :Rest workout number track in DB
