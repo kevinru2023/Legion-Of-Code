@@ -169,8 +169,20 @@ Feedback & Revisions:
 ----------------------------------------------------------------
 ## Activity Diagram ID: AD-08 – (To be completed)
 
-Related Test Case(s): TC-08  
-Purpose: (To be completed)
+Activity Diagram Title: Muscle Group Suggestion
+
+Related Epic: EP-BRBS, EP-WOP
+Related User Story(ies): UR-BRBS-02 
+
+Related Test Case(s): TC-08 
+Related Test Case Title: Muscle Group Suggestion 
+Related Test Case Objective(s): “Ensure that the system notifies the user which muscle group has seen the least amount of attention and has received sufficient rest time 
+
+Activity Diagram Description: This diagram shows the suggestions flow triggers when a user is adding a workout. The systems gets the users workout history, calculates how frequently each muscle group has been hit and sorts them from least to most frequent and check whether the muscle group has rested at least 2 days. If it has a suggestion is sent to the user recommending that muscle group be targeted. The flow ends when the user denies and add’s their own workout.  
+
+<img width="1735" height="1048" alt="AD-08_Muscle_Group_suggestion" src="https://github.com/user-attachments/assets/d2db5331-4a93-4fb7-ad99-c2bf0e86df77" />
+
+https://github.com/CS361-2026-Winter-Term/Legion-Of-Code/blob/main/design/activity-diagrams/AD-08_Muscle_Group_suggestion.puml 
 
 ----------------------------------------------------------------
 ## Activity Diagram ID: AD-09 – (To be completed)
