@@ -167,7 +167,7 @@ Feedback & Revisions:
 - Changes Made: Fixed an issue with the conditional logic flow to include a Yes section.  
 
 ----------------------------------------------------------------
-## Activity Diagram ID: AD-08 – (To be completed)
+## Activity Diagram ID: AD-08 – 
 
 Activity Diagram Title: Muscle Group Suggestion
 
