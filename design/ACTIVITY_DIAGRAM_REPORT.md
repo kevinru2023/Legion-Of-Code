@@ -135,10 +135,28 @@ Feedback & Revisions:
 - Changes Made: (To be completed)
 
 ----------------------------------------------------------------
-## Activity Diagram ID: AD-06 – (To be completed)
+## Activity Diagram ID: AD-06 – Tracking Reps and Sets
 
+Activity Diagram Title: Tracking Reps and Sets
+
+Related Epic: EP-APT  
+Related User Story(ies): UR-WP-03, UR-APT-01
 Related Test Case(s): TC-06  
-Purpose: (To be completed)
+Related Test Case Title: Tracking Reps and Sets 
+Related Test Case Objective(s):  
+- The user must be able to input the number of reps and sets the do while working out.
+
+Activity Diagram:
+- <img width="905" height="823" alt="AD-06_Tracking_Reps_and_Sets" src="https://github.com/user-attachments/assets/0d95b67d-ac53-4769-9b9b-a1a66b78edb6" />
+- https://github.com/CS361-2026-Winter-Term/Legion-Of-Code/blob/main/design/activity-diagrams/AD-06_Tracking_Reps_and_Sets.puml
+
+Notes & Assumptions:
+- None
+
+Feedback & Revisions:
+- Feedback from: (To be completed)
+- Revision Date: (To be completed)
+- Changes Made: (To be completed)
 
 ----------------------------------------------------------------
 ## Activity Diagram ID: AD-07
