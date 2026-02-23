@@ -28,28 +28,6 @@ Feedback & Revisions:
 - Revision Date: (To be completed)
 - Changes Made: (To be completed)
 
-----------------------------------------------------------------
-## Activity Diagram ID: AD-03 – (To be completed)
-
-Activity Diagram Title: (To be completed)
-
-Related Epic: (To be completed)  
-Related User Story(ies): (To be completed)  
-Related Test Case(s): TC-03  
-Related Test Case Title: (To be completed)  
-Related Test Case Objective(s): (To be completed)  
-
-Activity Diagram:
-- [Insert rendered UML Activity Diagram here]
-- [Insert GitHub link to PlantUML (.puml) file]
-
-Notes & Assumptions:
-- None
-
-Feedback & Revisions:
-- Feedback from: (To be completed)
-- Revision Date: (To be completed)
-- Changes Made: (To be completed)
 
 ----------------------------------------------------------------
 ## Activity Diagram ID: AD-04 – Prevent Starting Empty Workout Plan
