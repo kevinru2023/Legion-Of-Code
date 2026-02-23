@@ -147,7 +147,7 @@ Activity Diagram Title: Rest day Suggestion
 
 Related Epic: EP-BRBS, EP-WP 
 Related User Story(ies): UR-BRBS-01  
-Related Test Case(s): TC-01  
+Related Test Case(s): TC-07 
 Related Test Case Title: Rest day suggestion  
 Related Test Case Objective(s): Ensure that the system will suggest a rest day when users go to add another workout after 6 consecutive days of logging a workout.  
 
