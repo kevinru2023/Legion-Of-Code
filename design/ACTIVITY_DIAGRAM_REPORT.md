@@ -191,7 +191,30 @@ Related Test Case(s): TC-09
 Purpose: (To be completed)
 
 ----------------------------------------------------------------
-## Activity Diagram ID: AD-10 – (To be completed)
+## Activity Diagram ID: AD-10 – View Exercise Videos
 
-Related Test Case(s): TC-10  
-Purpose: (To be completed)
+Activity Diagram Title: View Exercise Videos
+
+Related Epic: EP-IID
+Related User Story(ies):
+- UR-IID-01
+
+Related Test Case(s): TC-10, TC-01
+Related Test Case Title:
+- Exercise Video Plays in Exercise Viewer
+- Workout Plan Creation
+Related Test Case Objective(s):
+Ensure that the user can navigate to the workout planner section and that the video player loads and plays the correct tutorial for the selected exercise.
+
+Activity Diagram Description:
+This activity diagram models the flow for viewing exercise tutorial videos during workout plan creation. The user logs in, opens the workout planner, views the exercise list, and selects “View Video” for an exercise. The system loads the corresponding tutorial video. If the video loads successfully, the client-side player plays it. If the video fails to load, the system displays an error and returns the user to the exercise list.
+
+Activity Diagram:
+- <img width="800" alt="AD-10 View Exercise Videos" src="https://github.com/CS361-2026-Winter-Term/Legion-Of-Code/blob/main/design/activity-diagrams/AD-10_View_Exercise_Video.png?raw=1" />
+- https://github.com/CS361-2026-Winter-Term/Legion-Of-Code/blob/main/design/activity-diagrams/AD-10_View_Exercise_Video.puml
+
+Notes & Assumptions:
+- Note 1 (if applicable): If the video fails to load, the “View Video” action displays a load error and does not start playback.
+
+Feedback & Revisions 
+- Feedback from [Niki]: Looks good, the diagram has a clear Start and End Node, all actions are meaningful and well-named, transitions are correct with no disconnected elements, decision nodes have valid conditions with at least two outcomes, and the diagram is readable, logically structured, and well-labeled. However, it does not include fork/join nodes or loops, as they are not needed.
