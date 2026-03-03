@@ -1,0 +1,14 @@
+@startuml
+class Planner {
+  {field} plans: list
+  {field} logs: list
+  {field} workouts: list
+
+  {method} add_plan(plan: WorkoutPlan)
+  {method} remove_plan(id: int) : bool
+  {method} list_plans() : list
+  {method} log_workout(session: Session)
+  {method} edit_log(id: int, new_sess: Session)
+  {method} get_logs(): list
+}
+@enduml
