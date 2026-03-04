@@ -72,5 +72,5 @@ class Workout:
     self.reps: int
     self.sets: int
     self.rest_time: int
-
+    self.video_id: str
 
