@@ -63,26 +63,14 @@ Auth: Nolan Cutler
 Supports: EP-BRBS, UR-W0P-01
 Collaborators: None
 """
-# @dataclass
+@dataclass
 class Workout:
     '''
-    name: str
-    sets: int
-    reps: int
-    rest_time: int
+    Stores information specific to an exercise
     '''
+    self.name: str
+    self.reps: int
+    self.sets: int
+    self.rest_time: int
 
-    def __init__(self, name: str):
-        self._name = name
-        self._track_reps = 0
-        self._track_sets = 0
-        
 
-    def track_sets(self, sets):
-        return None
-
-    def track_reps(self, reps):
-        return None
-    
-    def log_rest_time(self, time):
-        return None
