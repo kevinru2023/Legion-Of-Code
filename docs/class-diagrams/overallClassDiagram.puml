@@ -1,31 +1,14 @@
-@startuml
+@startuml overallClassDiagram
 
-package "Workout Planning & Tracking System" {
-    class WorkoutPlan{
-
-    }
-    class Viewer{
-
-    }
-    class Session{
-
-    }
-    class Workout{
-
-    }
-    class User{
-
-    }
-    class SuggestionEngine{
-        {method} +suggest_rest_day(workoutplan: WorkoutPlan): str
-        {method} +suggest_muscle_group(workoutplan: WorkoutPlan): str
-    }
-    class Planner{
-
-    }
-    class ProgressAnalyzer{
-        
-    }
+rectangle "Workout Planning & Tracking System" {
+    class WorkoutPlan
+    class Viewer
+    class Session
+    class Workout
+    class User
+    class SuggestionEngine
+    class Planner
+    class ProgressAnalyzer
 
     WorkoutPlan o-- Workout
     SuggestionEngine ..> WorkoutPlan
