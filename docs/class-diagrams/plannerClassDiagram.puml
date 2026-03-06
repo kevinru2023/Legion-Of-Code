@@ -1,14 +1,16 @@
 @startuml
-class Planner {
-  {field} plans: list
-  {field} logs: list
-  {field} workouts: list
+skinparam classAttributeIconSize 0
 
-  {method} add_plan(plan: WorkoutPlan)
-  {method} remove_plan(id: int) : bool
-  {method} list_plans() : list
-  {method} log_workout(session: Session)
-  {method} edit_log(id: int, new_sess: Session)
-  {method} get_logs(): list
+class Planner {
+   -plans: list
+   -logs: list
+   -workouts: list
+   --
+   +add_plan(plan: WorkoutPlan)
+   +remove_plan(id: int) : bool
+   +list_plans() : list
+   +log_workout(session: Session)
+   +edit_log(id: int, new_sess: Session)
+   +get_logs(): list
 }
 @enduml
