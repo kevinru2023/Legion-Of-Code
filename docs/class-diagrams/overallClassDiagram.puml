@@ -1,22 +1,38 @@
 @startuml overallClassDiagram
+left to right direction
 
-rectangle "Workout Planning & Tracking System" {
-    class WorkoutPlan
+package "Workout Planning & Tracking System"{
+    class User
+    class Planner
     class Viewer
+    class WorkoutPlan
     class Session
     class Workout
-    class User
     class SuggestionEngine
-    class Planner
-    class ProgressAnalyzer
+    class ProgressAnalyser
+
+    User -down-* WorkoutPlan
+    User -down-- Session
+    User -down-- Viewer
+
+    Planner -- WorkoutPlan
+    Planner -- Session
+    Planner ..> Viewer
+
+    Viewer -- WorkoutPlan
+    Viewer -- Session
+    Viewer -- Workout
+    Viewer ..> SuggestionEngine
 
     WorkoutPlan o-- Workout
-    SuggestionEngine ..> WorkoutPlan
-    Planner ..> Viewer
-    Viewer --> WorkoutPlan
-    Viewer --> Session
-    ProgressAnalyzer o.. Viewer
-    User *-- WorkoutPlan
-}
+    Session -- WorkoutPlan
+    Session o-- Workout
 
+    ProgressAnalyser ..> Viewer
+    ProgressAnalyser ..> Session
+    ProgressAnalyser ..> WorkoutPlan
+
+    SuggestionEngine ..> WorkoutPlan
+    SuggestionEngine ..> Session
+}
 @enduml
