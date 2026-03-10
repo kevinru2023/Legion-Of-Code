@@ -2,18 +2,21 @@
 C-06: Viewer
 Auth: Nolan Cutler
 Supports EP-WOP-01, UR-IID-01, UR-APT-03, UR-APT-02, UR-APT-01
-Collaborators: Planner[1] 
+Collaborators: Planner[1]
 """
+
+
 class Viewer:
     """
-    This will probably exist in the frontend in some ohter language/framework; this 
+    This will probably exist in the frontend in some ohter language/framework; this
     "code" is just a tentative outline for the structure of how that class will be implemented.
     """
+
     def __init__(self):
         # set config (darkmode, layout, etc)...
 
         self._planner = Planner()
-        
+
     def create_plan(self) -> None:
         # display workout plan editor and construct WorkoutPlan obj
         plan = _create_gui()
@@ -42,29 +45,34 @@ class Viewer:
     def select_workout_plan(self) -> WorkoutPlan:
         # load all plans
         plans = self._planner.list_plans()
-        
+
         # display all plans for selection
         return _select_gui(plans)
 
     def _view_workout_session(session: Session) -> None:
         # display session info
+        pass
 
     def _logs_gui(self) -> None:
         # display gui for viewing/editing logs
+        pass
 
     # note: this will entail viewing videos, which will likely
     # need to be stored remotely
     def _select_plan_gui(self) -> None:
-        # let user select plan 
+        # let user select plan
+        pass
 
     # note: this will entail viewing videos, which will likely
     # need to be stored remotely
     def _view_plans_gui(self) -> None:
         # display plans for viewing
+        pass
 
     def _log_workout_gui(self) -> Session:
         # display gui for constructing workout session
+        pass
 
     def _create_plan_gui(self) -> WorkoutPlan:
         # display gui for creating a WorkoutPlan
-
+        pass

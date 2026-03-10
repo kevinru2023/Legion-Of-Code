@@ -4,6 +4,8 @@ Auth: Kevin Rubio, Aron Meraz
 Supports: EP-BRBS, EP-WOP, UR-WP-01, UR-WP-02, UR-WP-03
 Collaborators: Workout[0..7] (since there is 7 days in the week)
 """
+
+
 class WorkoutPlan:
     def __init__(self):
         self._workout_plan = (
@@ -33,44 +35,3 @@ class WorkoutPlan:
     #     Chest: frequency : 2, last worked: Friday, underworked: False, overworked: False
     #     Quads: frequency : 0, last worked: Monday, underworked: True, overworked: True
     # }
-
-
-"""
-C-02: Suggestion Engine
-Auth: Kevin Rubio, Aron Meraz
-Supports: EP-BRBS,  EP-WOP-01, UR-BRBS
-Collaborators: Workoutplan
-"""
-class SuggestionEngine:
-    # will generate suggestions by analyzing workout plans
-
-    def __init__(self):
-        # Empty for now
-        pass
-
-    def suggest_rest_day(self, workoutplan) -> str:
-        # Will determin if rest is needed based on workout streak
-        pass
-
-    def suggest_muscle_group(self, workoutplan) -> str:
-        # Will determine which muscle groups should be worked next based on their frequency and last day worked
-        pass
-
-
-"""
-C-03: Workout
-Auth: Nolan Cutler
-Supports: EP-BRBS, UR-W0P-01
-Collaborators: None
-"""
-@dataclass
-class Workout:
-    '''
-    Stores information specific to an exercise
-    '''
-    self.name: str
-    self.reps: int
-    self.sets: int
-    self.rest_time: int
-    self.video_id: str
-
