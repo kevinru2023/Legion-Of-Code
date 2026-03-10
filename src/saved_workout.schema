@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": "object",
   "patternProperties": {
-    "^\\d{4}/\\d{1,2}/\\d{1,2}$": {
+    "^\\d+$": {
       "type": "object",
       "properties": {
         "sun": {
