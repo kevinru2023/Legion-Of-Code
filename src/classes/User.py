@@ -57,11 +57,7 @@ class User:
 
     def get_user_info(self) -> dict:
         """Returns basic user information."""
-        return {
-            "user_id": self._user_id,
-            "name": self._name,
-            "email": self._email
-        }
+        return {"user_id": self._user_id, "name": self._name, "email": self._email}
 
     # ------------------------
     # Planner Access
