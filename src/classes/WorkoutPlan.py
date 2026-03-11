@@ -1,3 +1,8 @@
+from collections import defaultdict
+from dataclasses import asdict
+
+from models.Workout import Workout
+
 """
 C-01: Class for Workout Plan
 Auth: Kevin Rubio, Aron Meraz
@@ -8,17 +13,35 @@ Collaborators: Workout[0..7] (since there is 7 days in the week)
 
 class WorkoutPlan:
     def __init__(self):
-        self._workout_plan = (
-            {}
-        )  # Init an empty dict for workout plan where Keys = Day of the week and Values = workout (probably will be class)
+        
+        # probably will need 
+        self._workout_plan = defaultdict(list)  # Init an empty dict for workout plan where Keys = Day of the week and Values = workout (probably will be class)
+
+    @property
+    def workout_plan(self) -> dict:
+        return self._workout_plan
 
     # Returns true if the workout plan is empty
     def workout_plan_empty(self) -> bool:
         return not self._workout_plan
 
     # Will add a workout to the workout plan
-    def add_workout(self, day, workout) -> None:
-        return None
+    def add_workout(self, day: str, workout: Workout) -> None:
+        self._workout_plan[day].append(workout)
+
+    def to_dict(self) -> dict:
+        return {
+            day: [asdict(w) for w in workouts]
+            for day, workouts in self._workout_plan.items()
+        }
+
+    @classmethod
+    def from_dict(cls, data: dict) -> "WorkoutPlan":
+        plan = cls()
+        for day, workouts in data.items():
+            for w in workouts:
+                plan.add_workout(day, Workout(**w))
+        return plan
 
     # Will calculate if a rest day is needed in the user's current workout plan i.e. if they have 5 days in a row of working out
     def calculate_rest_day(self) -> bool:
