@@ -8,6 +8,7 @@ Collaborators: Planner[1]
 from .Planner import Planner
 from .Session import Session
 from .WorkoutPlan import WorkoutPlan
+from models.Workout import Workout
 
 ALLOWED_WEEKDAYS = {"sun", "mon", "tues", "wed", "thurs", "fri", "sat"}
 
@@ -60,14 +61,14 @@ class Viewer:
         if not user:
             raise ValueError("No user cannot initialize Viewer")
         self._user = user
-        self._planner = Planner(user)
+        self._planner = Planner(user) # Critical for the entire app lol
 
     def _view_workout_session(self, session: Session) -> None:
         day = session.day
         notes = session.notes
 
         try:
-            workout = session.workout.name
+            workout = session.workout
         except Exception as e:
             workout = None
 
@@ -84,7 +85,8 @@ class Viewer:
         #     2. ID: 2, Day: Thursday
         print("Workout logs:")
         for index, session in enumerate(logs, start=1):
-            print(f"{index}. ID: {session.id}, Day: {session.day}, Notes: {session.notes}, RPE: {session.percieved_intensity}")
+            print(f"{index}. ID: {session.id}, Day: {session.day}, Notes: {session.notes}, RPE: {session.percieved_intensity}, Workout: {session.workout}") # this could break in the future since workout can be null
+
 
     def _select_plan_cli(self, plans=None) -> WorkoutPlan | None:
         if not plans:
@@ -126,11 +128,13 @@ class Viewer:
         notes = input("Notes: ").strip()
         intensity = self._input_int("Perceived intensity 1-10: ")
 
-        session = Session()
-        session._day = day
-        session._notes = notes
-        session._percieved_intensity = intensity
-        session._id = len(self._planner.get_logs()) + 1
+        id = len(self._planner.get_logs()) + 1
+
+        # Need to add workout logging to the CLI and link it to th session 
+        # will create an additiona cli function to input workout details and return a workout obj
+        
+        w = self._input_exercise()
+        session = Session(id = id, day=day, notes=notes, percieved_intensity=intensity, workout=w)
         return session
 
     def _create_plan_cli(self) -> WorkoutPlan:
@@ -182,7 +186,7 @@ class Viewer:
             return int(raw)
         return default
 
-    def _input_exercise(self) -> dict | None:
+    def _input_exercise(self) -> Workout | None:
         name = input("Workout name: ").strip()
         if name == "":
             return None
@@ -192,13 +196,13 @@ class Viewer:
         rest_time = self._input_int("Rest time (seconds): ", default=0)
         video_id = input("Video id: ").strip()
 
-        return {
-            "name": name,
-            "reps": reps,
-            "sets": sets,
-            "rest_time": rest_time,
-            "video_id": video_id,
-        }
+        return Workout(
+            name=name,
+            reps=reps,
+            sets=sets,
+            rest_time=rest_time,
+            video_id=video_id,
+        )
 
     def _prompt_weekday(self, prompt: str, allow_empty: bool = False) -> str | None:
         while True:

@@ -10,6 +10,7 @@ from pathlib import Path
 
 from .Session import Session
 from .WorkoutPlan import WorkoutPlan
+from models.Workout import Workout
 
 
 class Planner:
@@ -100,11 +101,14 @@ class Planner:
 
         data = []
         for session in self._log:
+            w = session.workout
             data.append({
                 "id": session.id,
                 "day": session.day,
                 "notes": session.notes,
                 "percieved_intensity": session.percieved_intensity,
+                # serialize workout fields so we can reconstruct it on load; None if no workout was linked
+                "workout": {"name": w.name, "reps": w.reps, "sets": w.sets, "rest_time": w.rest_time, "video_id": w.video_id} if w else None,
             })
 
         path.write_text(json.dumps(data, indent=2), encoding="utf-8")
@@ -122,14 +126,18 @@ class Planner:
             self._log = []
             return self._log
 
-        # 
         self._log = []
         for item in json.loads(text):
-            session = Session()
-            session._id = item.get("id")
-            session._day = item.get("day", "")
-            session._notes = item.get("notes", "")
-            session._percieved_intensity = item.get("percieved_intensity", 0)
+            workout_data = item.get("workout")
+            # reconstruct Workout if data was saved, otherwise None means no workout was linked for this session
+            workout = Workout(**workout_data) if workout_data else None
+            session = Session(
+                id=item.get("id", 0),
+                day=item.get("day", ""),
+                notes=item.get("notes", ""),
+                percieved_intensity=item.get("percieved_intensity", 0),
+                workout=workout,
+            )
             self._log.append(session)
 
         return self._log

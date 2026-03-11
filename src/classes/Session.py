@@ -11,12 +11,13 @@ from pathlib import Path
 from models.Workout import Workout
 
 class Session:
-    def __init__(self, id: int, day: str, notes: str, percieved_intensity: int):
+    def __init__(self, id: int, day: str, notes: str, percieved_intensity: int, workout: Workout | None= None):
         self._id: int = id
         self._day: str = day
         self._notes: str = notes
         self._percieved_intensity: int = percieved_intensity
-        self._workout = Workout(self)
+        # optional because new users logging a session without linking a specific exercise
+        self._workout: Workout | None = workout
 
     @property
     def id(self) -> int:
@@ -35,7 +36,7 @@ class Session:
         return self._percieved_intensity
 
     @property
-    def workout(self) -> Workout:
+    def workout(self) -> Workout | None:
         return self._workout
 
     def load_data(self):
@@ -69,7 +70,7 @@ class Session:
         data["Intensity"] = intensity
         self.save_data(data)
 
-    def log_workout(self, workout) -> None:
+    def log_workout(self, workout: Workout | None) -> None:
         data = self.load_data()
         data["Workout"] = workout
         self.save_data(data)
