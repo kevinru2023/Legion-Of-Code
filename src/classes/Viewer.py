@@ -5,7 +5,6 @@ Supports EP-WOP-01, UR-IID-01, UR-APT-03, UR-APT-02, UR-APT-01
 Collaborators: Planner[1]
 """
 
-from .Planner import Planner
 from .Session import Session
 from .WorkoutPlan import WorkoutPlan
 
@@ -67,7 +66,7 @@ class Viewer:
 
         try:
             workout = session.workout.name
-        except Exception as e:
+        except Exception:
             workout = None
 
         intensity = session.percieved_intensity
@@ -84,7 +83,8 @@ class Viewer:
         print("Workout logs:")
         for index, session in enumerate(logs, start=1):
             print(
-                f"{index}. ID: {session.id}, Day: {session.day}, Notes: {session.notes}, RPE: {session.percieved_intensity}"
+                f"{index}. ID: {session.id}, Day: {session.day}"
+                f"\nNotes: {session.notes}, RPE: {session.percieved_intensity}"
             )
 
     def _select_plan_cli(self, plans=None) -> WorkoutPlan:
