@@ -10,6 +10,8 @@ from .Session import Session
 from .WorkoutPlan import WorkoutPlan
 from models.Workout import Workout
 
+import json
+
 ALLOWED_WEEKDAYS = {"sun", "mon", "tues", "wed", "thurs", "fri", "sat"}
 
 
@@ -187,21 +189,25 @@ class Viewer:
         return default
 
     def _input_exercise(self) -> Workout | None:
-        name = input("Workout name: ").strip()
-        if name == "":
+        with open("data/exercises.json") as f:
+            exercise_dict = json.load(f)
+
+        print("Select one of the following exercises to add")
+        for name in exercise_dict.keys():
+            print(f"{name}")
+
+        selection = input(f"Enter selection (must match an exercise in the list): ").strip()
+
+        if selection not in exercise_dict:
             return None
 
-        reps = self._input_int("Reps: ", default=0)
-        sets = self._input_int("Sets: ", default=0)
-        rest_time = self._input_int("Rest time (seconds): ", default=0)
-        video_id = input("Video id: ").strip()
-
+        print("Workout added to log")
         return Workout(
-            name=name,
-            reps=reps,
-            sets=sets,
-            rest_time=rest_time,
-            video_id=video_id,
+            name=selection,
+            reps=exercise_dict[selection]["reps"],
+            sets=exercise_dict[selection]["sets"],
+            rest_time=exercise_dict[selection]["rest_time"],
+            video_id=exercise_dict[selection]["video_id"]
         )
 
     def _prompt_weekday(self, prompt: str, allow_empty: bool = False) -> str | None:

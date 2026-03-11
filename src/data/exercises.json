@@ -1,0 +1,33 @@
+{
+	"bench-press": {
+		"reps": 5,
+		"sets": 5,
+		"rest_time": 3,
+		"video_id": "todo"
+	},
+	"squat": {
+		"reps": 5,
+		"sets": 5,
+		"rest_time": 5,
+		"video_id": "todo"
+	},
+	"deadlift": {
+		"reps": 3,
+		"sets": 5,
+		"rest_time": 5,
+		"video_id": "todo"
+	},
+	"skull-crusher": {
+		"reps": 12,
+		"sets": 3,
+		"rest_time": 2,
+		"video_id": "todo"
+	},
+	"lateral-raise":
+	{
+		"reps": 12,
+		"sets": 3,
+		"rest_time": 2,
+		"video_id": "todo"
+	}
+}
