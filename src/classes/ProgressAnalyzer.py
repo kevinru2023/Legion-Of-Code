@@ -5,9 +5,9 @@ Supports: UR-APT-03, UR-APT-02, UR-APT-01
 Collaborators: Session [...], Planner[...], User[...]
 """
 
-from Planner import Planner
-from WorkoutPlan import WorkoutPlan
-from User import User
+
+from .WorkoutPlan import WorkoutPlan
+from .User import User
 from datetime import date as date_type, timedelta
 
 
