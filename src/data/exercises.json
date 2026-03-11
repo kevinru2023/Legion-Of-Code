@@ -3,31 +3,31 @@
 		"reps": 5,
 		"sets": 5,
 		"rest_time": 3,
-		"video_id": "todo"
+		"video_id": "https://youtu.be/wzq57DB5Ppg?si=VDtNU_05aODeBA86"
 	},
 	"squat": {
 		"reps": 5,
 		"sets": 5,
 		"rest_time": 5,
-		"video_id": "todo"
+		"video_id": "https://youtu.be/rt59bYm7SeE?si=QBLrfcNkJRmdMguy"
 	},
 	"deadlift": {
 		"reps": 3,
 		"sets": 5,
 		"rest_time": 5,
-		"video_id": "todo"
+		"video_id": "https://youtu.be/Sk9cS7-2p98?si=RWZgkI1FSHdcuF77"
 	},
 	"skull-crusher": {
 		"reps": 12,
 		"sets": 3,
 		"rest_time": 2,
-		"video_id": "todo"
+		"video_id": "https://youtu.be/d_KZxkY_0cM?si=9r0mu2DRyKK8df5l"
 	},
 	"lateral-raise":
 	{
 		"reps": 12,
 		"sets": 3,
 		"rest_time": 2,
-		"video_id": "todo"
+		"video_id": "https://youtube.com/shorts/xyK8UiC-BUw?si=e95Xc-92qditIebq"
 	}
 }
