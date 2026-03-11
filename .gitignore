@@ -24,4 +24,4 @@ build/
 .vscode/
 *.swp
 
-.src/prog-data
+src/prog-data
