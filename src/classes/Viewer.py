@@ -72,7 +72,7 @@ class Viewer:
         except Exception as e:
             workout = None
 
-        intensity = session.percieved_intensity
+        intensity = session.perceived_intensity
         print(f"Day: {day}, Workout: {workout}, Intensity: {intensity}, Notes: {notes}")
 
     def _logs_cli(self, logs: list[Session] = []) -> None:
@@ -85,7 +85,7 @@ class Viewer:
         #     2. ID: 2, Day: Thursday
         print("Workout logs:")
         for index, session in enumerate(logs, start=1):
-            print(f"{index}. ID: {session.id}, Day: {session.day}, Notes: {session.notes}, RPE: {session.percieved_intensity}, Workout: {session.workout}") # this could break in the future since workout can be null
+            print(f"{index}. ID: {session.id}, Day: {session.day}, Notes: {session.notes}, RPE: {session.perceived_intensity}, Workout: {session.workout}") # this could break in the future since workout can be null
 
 
     def _select_plan_cli(self, plans=None) -> WorkoutPlan | None:
@@ -134,7 +134,7 @@ class Viewer:
         # will create an additiona cli function to input workout details and return a workout obj
         
         w = self._input_exercise()
-        session = Session(id = id, day=day, notes=notes, percieved_intensity=intensity, workout=w)
+        session = Session(id = id, day=day, notes=notes, perceived_intensity=intensity, workout=w, date=None, duration_minutes=0)
         return session
 
     def _create_plan_cli(self) -> WorkoutPlan:

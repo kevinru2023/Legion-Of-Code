@@ -135,7 +135,7 @@ class Planner:
                 id=item.get("id", 0),
                 day=item.get("day", ""),
                 notes=item.get("notes", ""),
-                percieved_intensity=item.get("percieved_intensity", 0),
+                perceived_intensity=item.get("perceived_intensity", 0),
                 workout=workout,
             )
             self._log.append(session)
