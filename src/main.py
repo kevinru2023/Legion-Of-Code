@@ -3,20 +3,21 @@ from classes.Planner import Planner
 from classes.User import User
 from classes.Viewer import Viewer
 from classes.SuggestionEngine import SuggestionEngine
+from classes.ProgressAnalyzer import ProgressAnalyzer
 
 
 def main():
     print("Legion of Code - Workout Planner Application")
     print("============================================")
-
+    
     username = input("Please Enter Your Username: ")
     email = input("Please Enter your email: ")
-
+    
     user = User(username=username, email=email)
-    user.save_credentials()  # creates a creds file for user
-
-    viewer = Viewer(user)
-
+    user.save_credentials() # creates a creds file for user
+    
+    viewer = Viewer(user) 
+    
     while True:
         print("\nMenu:")
         print("1. Create Workout Plan")
@@ -24,8 +25,9 @@ def main():
         print("3. Edit Workout Plan")
         print("4. Add Workout Log")
         print("5. View Workout Logs")
-        print("6. Get a Suggestion")
-        print("7. Exit")
+        print("6. Get a suggestion")
+        print("7. View Statistics")
+        print("8. Exit")
 
         choice = input("Enter your choice: ").strip()
 
@@ -47,11 +49,13 @@ def main():
             else:
                 print("No workout plan found.")
         elif choice == "7":
+            print(ProgressAnalyzer.statistics(user))
+        elif choice == "8":
             print("Exiting application. Goodbye!")
             sys.exit(0)
+            
         else:
             print("Invalid choice, please try again.")
-
 
 if __name__ == "__main__":
     main()
