@@ -135,7 +135,7 @@ class ProgressAnalyzer:
             
             weekly_data.append(
                 {
-                    "week": f"Week #{i+1}",
+                    "week": i,
                     "workout_count": count,
                     "total_duration": duration,
                 }
@@ -154,7 +154,7 @@ class ProgressAnalyzer:
         
         insights = [] 
         if len(self.sessions) < 3:
-            insights.append("Log more workouts for a simple analysis :)")
+            insights.append("Log more workouts for some insights :)")
             return insights # Exit for no crash :)
 
         # TODO: add default insights for streaks and duration.
@@ -190,3 +190,25 @@ class ProgressAnalyzer:
             "weekly_stats": self.calculate_weekly_stats(),
             "improvement_areas": self.improvement_insights(),
         }
+    def statistics(user):
+        user_stats = ProgressAnalyzer(user)
+        statistics = user_stats.generate_report()
+        basic_stats, weekly_stats = statistics['basic_stats'], statistics['weekly_stats']
+        insights = statistics['improvement_areas']
+        # print("--DEBUG--")
+        # print(insights)
+        print("\n // Workout Statistics // ")
+        print(f"Total Workouts: {basic_stats['total_workouts']}")
+        print(f"Average Per Week: {basic_stats['avg_per_week']}")
+        print(f"Current Streak: {basic_stats['current_streak']}\n")
+        for i, week in enumerate(weekly_stats):
+            print(f" -- Week {week['week']} STATS -- ")
+            # print(f"Week # {week[i]['week']}")
+            print(f"Workout Count this Week: {week['workout_count']}")
+            print(f"Total time spent working out: {week['total_duration']}")
+        for item in insights:
+            print(
+                    "\n Workout Insights:\n", 
+                    f"{item}"
+                )    
+            print("\n // End of Workout Statistics")
