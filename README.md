@@ -17,7 +17,21 @@ src/
   classes/    # Application logic classes
   models/     # Data classes
   data/       # JSON files containing information such as different exercises and the workout videos
-  prog-data/  # Read/Write Dir for readings Logs stored as JSON 
+  prog-data/  # Read/Write Dir for data crated during program runtime 
+```
+
+## Using
+To run the program, first clone the repo:
+```bash
+git clone https://github.com/CS361-2026-Winter-Term/Legion-Of-Code
+cd Legion-Of-Code
+```
+At the moment, there is no external dependencies besides a Python3 runtime (we tested with 3.10)
+
+To run the program, cd into the src folder and execute the main.py script:
+```
+cd src
+python3 main.py
 ```
 
 ## Development Setup
