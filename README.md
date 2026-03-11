@@ -21,7 +21,7 @@ src/
 ```
 
 ## Using
-To run the program, first clone the repo:
+First clone the repo:
 ```bash
 git clone https://github.com/CS361-2026-Winter-Term/Legion-Of-Code
 cd Legion-Of-Code

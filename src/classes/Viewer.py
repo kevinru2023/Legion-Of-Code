@@ -152,7 +152,7 @@ class Viewer:
     def _create_plan_cli(self) -> WorkoutPlan:
         plan = WorkoutPlan()
 
-        print("Create plan. Leave weekday empty to finish")
+        print("\n-- Create plan. Leave weekday empty to finish")
         while True:
             day = self._prompt_weekday("Day (sun/mon/tues/wed/thurs/fri/sat): ", allow_empty=True)
             if day is None:
