@@ -43,7 +43,7 @@ class Viewer:
     def view_logs(self) -> None:
         self._logs_cli(self._planner.get_logs())
 
-    def select_workout_plan(self) -> WorkoutPlan:
+    def select_workout_plan(self) -> WorkoutPlan | None:
         plans = self._planner.list_plans()
         return self._select_plan_cli(plans)
 
@@ -60,6 +60,7 @@ class Viewer:
         if not user:
             raise ValueError("No user cannot initialize Viewer")
         self._user = user
+        self._planner = Planner(user)
 
     def _view_workout_session(self, session: Session) -> None:
         day = session.day
@@ -73,7 +74,7 @@ class Viewer:
         intensity = session.percieved_intensity
         print(f"Day: {day}, Workout: {workout}, Intensity: {intensity}, Notes: {notes}")
 
-    def _logs_cli(self, logs: list[Session] = None) -> None:
+    def _logs_cli(self, logs: list[Session] = []) -> None:
         if not logs:
             print("No workout logs")
             return
@@ -85,7 +86,7 @@ class Viewer:
         for index, session in enumerate(logs, start=1):
             print(f"{index}. ID: {session.id}, Day: {session.day}, Notes: {session.notes}, RPE: {session.percieved_intensity}")
 
-    def _select_plan_cli(self, plans=None) -> WorkoutPlan:
+    def _select_plan_cli(self, plans=None) -> WorkoutPlan | None:
         if not plans:
             return None
 
@@ -117,7 +118,7 @@ class Viewer:
             data = plan.workout_plan
             print(f"{index}. {data}")
 
-    def _log_workout_cli(self) -> Session:
+    def _log_workout_cli(self) -> Session | None:
         day = self._prompt_weekday("Workout day (sun/mon/tues/wed/thurs/fri/sat): ")
         if day is None:
             return None
@@ -154,7 +155,7 @@ class Viewer:
 
     def _edit_plan_cli(self, plan: WorkoutPlan):
         print("Current plan:")
-        print(plan.workout_plan)
+        print(plan._workout_plan)
 
         day = self._prompt_weekday("Day to edit (sun/mon/tues/wed/thurs/fri/sat): ")
         action = input("Type 'remove' to remove day, otherwise press Enter to replace workouts: ").strip().lower()
@@ -199,7 +200,7 @@ class Viewer:
             "video_id": video_id,
         }
 
-    def _prompt_weekday(self, prompt: str, allow_empty: bool = False) -> str:
+    def _prompt_weekday(self, prompt: str, allow_empty: bool = False) -> str | None:
         while True:
             day = input(prompt).strip().lower()
 

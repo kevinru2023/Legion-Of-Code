@@ -24,14 +24,16 @@ class Planner:
 
     def add_plan(self, plan: WorkoutPlan) -> None:
         self._plans.append(plan)
-        self.save_plans()
+        if self.save_plans() is None: 
+            print("Error saving workout plans")
 
     def list_plans(self) -> list[WorkoutPlan]:
         return self._plans
 
     def log_workout(self, session: Session) -> None:
         self._log.append(session)
-        self.save_log()
+        if self.save_log() is None:
+            print("Error saving workout log")
 
     def edit_log(self, id: int, new_sess: Session) -> None:
         for index, session in enumerate(self._log):
@@ -51,7 +53,7 @@ class Planner:
     def get_user(self):
         return self._user
 
-    def save_plans(self) -> str:
+    def save_plans(self) -> str | None:
         # get workout-plan json for this user
         path = self._get_data_path("workout-plan")
         if path is None:
@@ -91,7 +93,7 @@ class Planner:
 
         return self._plans
 
-    def save_log(self) -> str:
+    def save_log(self) -> str | None:
         path = self._get_data_path("workout-log")
         if path is None:
             return None

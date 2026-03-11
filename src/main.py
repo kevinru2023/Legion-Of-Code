@@ -12,7 +12,11 @@ def main():
     email = input("Please Enter your email: ")
     
     user = User(username=username, email=email)
-    user.save_credentials()
+    user.save_credentials() # creates a creds file for user
+    
+    viewer = Viewer(user) 
+    
+    
     pass
 
 
