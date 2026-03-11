@@ -62,9 +62,7 @@ class Planner:
 
         data = []
         for plan in self._plans:
-            data.append({
-                "workout_plan": plan.workout_plan,
-            })
+            data.append({"workout_plan": plan.to_dict()})
 
         path.write_text(json.dumps(data, indent=2), encoding="utf-8")
         return str(path)
@@ -84,8 +82,7 @@ class Planner:
         # load plans from the workout-plan json
         self._plans = []
         for item in json.loads(text):
-            plan = WorkoutPlan()
-            plan._workout_plan = item.get("workout_plan", {})
+            plan = WorkoutPlan.from_dict(item.get("workout_plan", {}))
             self._plans.append(plan)
 
         return self._plans
@@ -102,7 +99,7 @@ class Planner:
                 "id": session.id,
                 "day": session.day,
                 "notes": session.notes,
-                "percieved_intensity": session.percieved_intensity,
+                "perceived_intensity": session.perceived_intensity,
                 # serialize workout fields so we can reconstruct it on load; None if no workout was linked
                 "workout": {"name": w.name, "reps": w.reps, "sets": w.sets, "rest_time": w.rest_time, "video_id": w.video_id} if w else None,
             })
