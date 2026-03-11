@@ -64,8 +64,6 @@ class Planner:
         for plan in self._plans:
             data.append({
                 "workout_plan": plan.workout_plan,
-                "last_rest_day": plan.workout_plan,
-                "current_streak": plan.workout_plan
             })
 
         path.write_text(json.dumps(data, indent=2), encoding="utf-8")

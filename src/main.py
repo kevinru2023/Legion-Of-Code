@@ -43,10 +43,6 @@ def main():
             sys.exit(0)
         else:
             print("Invalid choice, please try again.")
-    
-    
-    pass
-
 
 if __name__ == "__main__":
     main()
