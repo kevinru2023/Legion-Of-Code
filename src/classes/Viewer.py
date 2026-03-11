@@ -117,10 +117,20 @@ class Viewer:
             return
 
         print("Saved workout plans:")
-        # list out workouts
+        # list out workout plans
         for index, plan in enumerate(plans, start=1):
+            print('-' * 30, f"Plan {index}:", '-' * 30)
+
             data = plan.workout_plan
-            print(f"{index}. {data}")
+            # list attributes of plan
+            for day, workouts in data.items():
+                print(f" ----- {day} -----")
+                for i in range(len(workouts)):
+                    print(f" * name: {workouts[i].name}")
+                    print(f" - sets: {workouts[i].sets}")
+                    print(f" - reps: {workouts[i].reps}")
+                    print(f" - rest_time: {workouts[i].rest_time}")
+                    print(f" - URL: {workouts[i].video_id}")
 
     def _log_workout_cli(self) -> Session | None:
         day = self._prompt_weekday("Workout day (sun/mon/tues/wed/thurs/fri/sat): ")
@@ -201,7 +211,7 @@ class Viewer:
         if selection not in exercise_dict:
             return None
 
-        print("Workout added to log")
+        print(f"{selection} selected")
         return Workout(
             name=selection,
             reps=exercise_dict[selection]["reps"],
