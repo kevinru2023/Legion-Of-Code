@@ -16,7 +16,8 @@ The Legion Of Code CS361 group repository.
 src/
   classes/    # Application logic classes
   models/     # Data classes
-  data/       # JSON data files
+  data/       # JSON files containing information such as different exercises and the workout videos
+  prog-data/  # Read/Write Dir for readings Logs stored as JSON 
 ```
 
 ## Development Setup
