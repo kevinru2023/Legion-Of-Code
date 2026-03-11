@@ -8,47 +8,70 @@ Collaborators: Session [...], Planner[...], User[...]
 from Planner import Planner
 from WorkoutPlan import WorkoutPlan
 from User import User
-from datetime import date as date_type
-"""
-    What a json entry would look like:
-    
-    "mon": {
-            "type": "array",
-            "items": {
-                "type": "object",
-                "properties": {
-                "name": { "type": "string" },
-                "reps": { "type": "integer" },
-                "sets": { "type": "integer" },
-                "rest_time": { "type": "integer" },
-                "video_id": { "type": "string" }
-                },
-                "required": ["name", "reps", "sets", "rest_time", "video_id"],
-                "additionalProperties": false
-            }
-            },
-"""
+from datetime import date as date_type, timedelta
 
 
 class ProgressAnalyzer:
     """
     Primary Purpose: Manages the calculation of statistics and tracking of progress.
+    
+    READ THESE NOTES:
+        This class assumes that it will be given a list of Sessions. 
+        Tracing where this list of session comes from:
+            [Planner.py] get_logs(self) -> list[Session] --
+                [User.py] get_sessions(self) -> list[Session] --
+                     -> [ProgressAnalyzer.py] 
+                        __init__(self, user, session): 
+                            if user:
+                                self.sessions = user.get_sessions()
+                            else:
+                                self.sessions = sessions or []  # list of Session objects
+                                
+        TLDR; Sessions can be supplied directly or retrived from User object
+              Session.py has _date and _duration_minutes attributes added for this class.
+              
+              If the session logs (list of kept sessions) is EVER read from JSON,
+                    it breaks all statistics calculations. 
     """
-
-    def __init__(self, sessions=None, date_range=None, user=None, planner=None):
+    # user -> Retrieves the user's completed session (if exists)
+    # session -> List of COMPLETED sessions
+    def __init__(self, user=None, sessions=None):
         if user:
             self.sessions = user.get_sessions()
-        elif planner:
-            self.sessions = planner.get_logs()
         else:
-            self.sessions = sessions  # list of Session objects
+            self.sessions = sessions or []  # list of Session objects
 
-    # Calculate [completed] User Workout Statistics 
+    def calculate_streak(self) -> int:
+        """
+        Calculates the current consecutive-day workout streak.
+
+        Sorts all sessions by date, then walks forward comparing adjacent days.
+        If two consecutive sessions are exactly 1 day apart, the streak continues.
+        If a gap is found, the streak resets to 1. 
+        NOTE: Does not anchor to today's date, so edits to past sessions are 
+              automatically reflected when refreshing (calling) this class.
+
+        Returns:
+            int: The current streak count. Returns 0 if there are no sessions.
+        """
+        
+        # Streaks (basic implementation)
+        distinct_days = sorted({s.date for s in self.sessions})
+        current_streak = 0
+        for i in range(1, len(distinct_days)):
+            # Count forwards, and if the dates are exactly 1 day apart, streak++
+            if (distinct_days[i] - distinct_days[i-1]).days == 1:
+                current_streak += 1
+            else:
+                current_streak = 1
+        return current_streak
+    
     # TODO: Intended statistics:
-    #       Total Workouts -- Integer
-    #       Streaks -- Integer
-    #       Average Workouts (that week) -- time
+    #       Total Workouts -- Int
+    #       Streaks -- Int
+    #       Average Workouts (that week) -- float
     def calculate_stats(self):
+        
         total_sessions = len(self.sessions)
         if not self.sessions: # No sessions
             return {
@@ -66,16 +89,8 @@ class ProgressAnalyzer:
         dates = sorted([s.date for s in self.sessions]) 
         num_weeks = max(((dates[-1] - dates[0]).days / 7), 1) # without max(,1), zero is possible
         avg_per_week = round(total_sessions / num_weeks, 1)
-        
-        # Streaks (basic implementation)
-        distinct_days = sorted({s.date for s in self.sessions})
-        current_streak = 0
-        for i in range(1, len(distinct_days)):
-            # Count forwards, and if the dates are exactly 1 day apart, streak++
-            if (distinct_days[i] - distinct_days[i-1]).days == 1:
-                current_streak += 1
-            else:
-                current_streak = 1
+        # Streaks
+        current_streak = self.calculate_streak()
         
         return {
             "total_workouts": total_sessions,
@@ -83,16 +98,40 @@ class ProgressAnalyzer:
             "current_streak": current_streak}
         
 
-    def weekly_stats(self, weeks=4):
+    def calculate_weekly_stats(self, weeks=4):
+        """
+        Breaks down workout activity into weekly buckets going back from today.
+
+        Args:
+            weeks (int): Number of weekly buckets to generate. 
+                         Defaults to 4 (month).
+
+        Returns:
+            list: A list of dicts, one per week, each containing:
+                - "week" (str): Label for the bucket (e.g. "Week #1").
+                - "workout_count" (int): Number of sessions in that window.
+                - "total_duration" (int): Total minutes worked out that week.
+        """
         today = date_type.today()
         weekly_data = []
         for i in range(weeks):
             # Each iteration is week #
+            # Week bucket definition, going backwards from today.
+            # i=0 → current week, i=1 → last week, i=2 → two weeks ago, etc.
+            week_start = today - timedelta(weeks=i+1)
+            week_end   = today - timedelta(weeks=i)
             
+            # Duration : Sum total workout minutes for this window
+            duration = sum(
+                s.duration_minutes for s in self.sessions
+                if week_start <= s.date < week_end
+            )
             
-            
-            # Duration
             # Workouts total that week
+            count = sum(
+                1 for s in self.sessions
+                if week_start <= s.date < week_end
+            )
             
             weekly_data.append(
                 {
@@ -106,20 +145,48 @@ class ProgressAnalyzer:
 
     # Insight text
     def improvement_insights(self):
+        """
+        Generates motivational insight messages based on streak and workout duration.
+
+        Returns:
+            list: A list of insight strings to display to the user.
+        """
+        
         insights = [] 
         if len(self.sessions) < 3:
-            insights.append("Log more workouts for an analysis :)")
+            insights.append("Log more workouts for a simple analysis :)")
+            return insights # Exit for no crash :)
 
-        # TODO: add default insights for higher amounts of sessions.
-        # if 
-        # return insights
+        # TODO: add default insights for streaks and duration.
+        streak = self.calculate_streak()
+        if streak == 1:
+            insights.append("You've started a streak — come back tomorrow to keep it going!")
+        elif streak < 4:
+            insights.append(f"You're on a {streak}-day streak — great consistency, keep it up!")
+        elif streak < 7:
+            insights.append(f"{streak} days in a row — you're building a solid habit!")
+        else:
+            insights.append(f"Incredible! {streak}-day streak — you're on fire!")
+            
+        # Duration
+        durations = [s.duration_minutes for s in self.sessions]
+        avg_duration = sum(durations) / len(durations)
 
+        if avg_duration < 20:
+            insights.append("Even short sessions count — try pushing to 20 minutes next time!")
+        elif avg_duration < 45:
+            insights.append(f"You're averaging {round(avg_duration)} minutes per workout — nice work!")
+        else:
+            insights.append(f"Averaging {round(avg_duration)} minutes per session — outstanding effort!")
+        return insights
+    
+    # Generates all statistics (general + weekly) and motivational improvement insights
     def generate_report(self):
         """
-        Generate comprehensive progress report
+        Generate comprehensive progress report statistics
         """
         return {
             "basic_stats": self.calculate_stats(),
-            "weekly_stats": self.weekly_stats(),
+            "weekly_stats": self.calculate_weekly_stats(),
             "improvement_areas": self.improvement_insights(),
         }
