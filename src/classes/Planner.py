@@ -15,8 +15,8 @@ from .WorkoutPlan import WorkoutPlan
 class Planner:
     def __init__(self, user=None):
         self._user = user
-        self._plans = [] # workoutplans
-        self._log = [] # sessions
+        self._plans = []  # workoutplans
+        self._log = []  # sessions
 
         if self._user is not None and self._user.user_id:
             self.load_saved_plans()
@@ -59,11 +59,13 @@ class Planner:
 
         data = []
         for plan in self._plans:
-            data.append({
-                "workout_plan": plan.workout_plan,
-                "last_rest_day": plan.workout_plan,
-                "current_streak": plan.workout_plan
-            })
+            data.append(
+                {
+                    "workout_plan": plan.workout_plan,
+                    "last_rest_day": plan.workout_plan,
+                    "current_streak": plan.workout_plan,
+                }
+            )
 
         path.write_text(json.dumps(data, indent=2), encoding="utf-8")
         return str(path)
@@ -98,12 +100,14 @@ class Planner:
 
         data = []
         for session in self._log:
-            data.append({
-                "id": session.id,
-                "day": session.day,
-                "notes": session.notes,
-                "percieved_intensity": session.percieved_intensity,
-            })
+            data.append(
+                {
+                    "id": session.id,
+                    "day": session.day,
+                    "notes": session.notes,
+                    "percieved_intensity": session.percieved_intensity,
+                }
+            )
 
         path.write_text(json.dumps(data, indent=2), encoding="utf-8")
         return str(path)
@@ -120,7 +124,7 @@ class Planner:
             self._log = []
             return self._log
 
-        # 
+        # load Session files into session log member variable
         self._log = []
         for item in json.loads(text):
             session = Session()
@@ -147,4 +151,3 @@ class Planner:
         data_dir = Path(__file__).resolve().parent.parent / "prog-data"
         data_dir.mkdir(parents=True, exist_ok=True)
         return data_dir / f"{prefix}-{user_id}.json"
-

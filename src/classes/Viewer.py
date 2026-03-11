@@ -83,7 +83,9 @@ class Viewer:
         #     2. ID: 2, Day: Thursday
         print("Workout logs:")
         for index, session in enumerate(logs, start=1):
-            print(f"{index}. ID: {session.id}, Day: {session.day}, Notes: {session.notes}, RPE: {session.percieved_intensity}")
+            print(
+                f"{index}. ID: {session.id}, Day: {session.day}, Notes: {session.notes}, RPE: {session.percieved_intensity}"
+            )
 
     def _select_plan_cli(self, plans=None) -> WorkoutPlan:
         if not plans:
@@ -157,7 +159,11 @@ class Viewer:
         print(plan.workout_plan)
 
         day = self._prompt_weekday("Day to edit (sun/mon/tues/wed/thurs/fri/sat): ")
-        action = input("Type 'remove' to remove day, otherwise press Enter to replace workouts: ").strip().lower()
+        action = (
+            input("Type 'remove' to remove day, otherwise press Enter to replace workouts: ")
+            .strip()
+            .lower()
+        )
 
         if action == "remove":
             if day in plan._workout_plan:
@@ -181,7 +187,7 @@ class Viewer:
             return int(raw)
         return default
 
-    def _input_exercise(self) -> dict | None:
+    def _input_exercise(self) -> dict:
         name = input("Workout name: ").strip()
         if name == "":
             return None
@@ -210,4 +216,3 @@ class Viewer:
                 return day
 
             print("Invalid weekday. Use: sun, mon, tues, wed, thurs, fri, sat")
-

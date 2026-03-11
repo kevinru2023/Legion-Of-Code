@@ -12,6 +12,7 @@ from .Planner import Planner
 from .WorkoutPlan import WorkoutPlan
 from .Session import Session
 
+
 class User:
     """
     Represents a user of the workout tracking application.
@@ -104,5 +105,3 @@ class User:
         data_dir = Path(__file__).resolve().parent.parent / "prog-data"
         data_dir.mkdir(parents=True, exist_ok=True)
         return data_dir / f"{self._user_id}.info"
-
-

@@ -7,6 +7,7 @@ Collaborators: Workout[1]
 
 from models.Workout import Workout
 
+
 class Session:
     def __init__(self):
         self._id = None
