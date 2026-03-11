@@ -88,8 +88,6 @@ class Planner:
         for item in json.loads(text):
             plan = WorkoutPlan()
             plan._workout_plan = item.get("workout_plan", {})
-            plan._last_rest_day = item.get("last_rest_day")
-            plan._current_streak = item.get("current_streak", 0)
             self._plans.append(plan)
 
         return self._plans
