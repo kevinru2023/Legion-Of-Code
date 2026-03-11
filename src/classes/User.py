@@ -18,16 +18,11 @@ class User:
     A User owns workout plans and workout session history.
     """
 
-    def __init__(self, user_id: str, name: str, email: str):
-        self._user_id: str = user_id
-        self._name: str = name
+    def __init__(self, username: str, email: str):
+        self._username: str = username
         self._email: str = email
         self._planner = Planner(self)
         self.load_credentials()
-
-    @property
-    def user_id(self) -> str:
-        return self._user_id
 
     # ------------------------
     # Workout Plan Management
@@ -65,7 +60,7 @@ class User:
 
     def get_user_info(self) -> dict:
         """Returns basic user information"""
-        return {"user_id": self._user_id, "name": self._name, "email": self._email}
+        return {"username": self._username, "email": self._email}
 
     def get_planner(self) -> Planner:
         return self._planner
@@ -76,8 +71,7 @@ class User:
     def save_credentials(self) -> str:
         path = self._credentials_path()
         payload = {
-            "user_id": self._user_id,
-            "name": self._name,
+            "username": self._username,
             "email": self._email,
         }
 
@@ -96,13 +90,13 @@ class User:
             return False
 
         data = json.loads(text)
-        self._name = data.get("name", self._name)
+        self._username = data.get("username", self._username)
         self._email = data.get("email", self._email)
         return True
 
     def _credentials_path(self) -> Path:
         data_dir = Path(__file__).resolve().parent.parent / "prog-data"
         data_dir.mkdir(parents=True, exist_ok=True)
-        return data_dir / f"{self._user_id}.info"
+        return data_dir / f"{self._username}.info"
 
 

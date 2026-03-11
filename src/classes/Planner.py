@@ -18,7 +18,7 @@ class Planner:
         self._plans = [] # workoutplans
         self._log = [] # sessions
 
-        if self._user is not None and self._user.user_id:
+        if self._user is not None and self._user._username:
             self.load_saved_plans()
             self.load_saved_log()
 
@@ -44,7 +44,7 @@ class Planner:
 
     def set_user(self, user) -> None:
         self._user = user
-        if self._user is not None and self._user.user_id:
+        if self._user is not None and self._user._username:
             self.load_saved_plans()
             self.load_saved_log()
 
@@ -132,19 +132,19 @@ class Planner:
 
         return self._log
 
-    def get_workout_plan_path(self) -> str:
+    def get_workout_plan_path(self) -> str | None:
         path = self._get_data_path("workout-plan")
         return str(path) if path else None
 
-    def _get_data_path(self, prefix: str) -> Path:
+    def _get_data_path(self, prefix: str) -> Path | None:
         if self._user is None:
             return None
 
-        user_id = self._user.user_id
-        if not user_id:
+        username= self._user._username
+        if not username:
             return None
 
         data_dir = Path(__file__).resolve().parent.parent / "prog-data"
         data_dir.mkdir(parents=True, exist_ok=True)
-        return data_dir / f"{prefix}-{user_id}.json"
+        return data_dir / f"{prefix}-{username}.json"
 
