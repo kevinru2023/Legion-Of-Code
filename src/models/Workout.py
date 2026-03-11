@@ -5,14 +5,12 @@ Supports: EP-BRBS, UR-W0P-01
 Collaborators: None
 """
 
+from dataclasses import dataclass
+
 @dataclass
 class Workout:
-    """
-    Stores information specific to an exercise
-    """
-
-    self.name: str
-    self.reps: int
-    self.sets: int
-    self.rest_time: int
-    self.video_id: str
+    name: str
+    reps: int
+    sets: int
+    rest_time: int
+    video_id: str

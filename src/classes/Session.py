@@ -5,14 +5,15 @@ Supports: EP-WOP-01, UR-APT-03, UR-APT-02, UR-APT-01
 Collaborators: Workout[1]
 """
 
+from models.Workout import Workout
 
 class Session:
     def __init__(self):
-        self._id = None
-        self._day = ""
-        self._notes = ""
-        self._percieved_intensity = 0
-        self._workout = None
+        self._id: int = None
+        self._day: str = ""
+        self._notes: str = ""
+        self._percieved_intensity: int = 0
+        self._workout: Workout = None
 
     @property
     def id(self) -> int:
@@ -31,20 +32,20 @@ class Session:
         return self._percieved_intensity
 
     @property
-    def workout(self):
+    def workout(self) -> Workout:
         return self._workout
 
     def store_notes(self, notes: str) -> None:
-        pass
+        self._notes = notes
 
     def track_id(self, id: int) -> None:
-        return None
+        self._id = id
 
     def log_workout_day(self, day: str) -> None:
-        return None
+        self._day = day
 
     def workout_intensity(self, intensity: int) -> None:
-        return None
+        self._percieved_intensity = intensity
 
-    def log_workout(self, workout) -> None:
-        return None
+    def log_workout(self, workout: Workout) -> None:
+        self._workout = workout

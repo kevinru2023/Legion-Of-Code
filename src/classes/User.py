@@ -5,10 +5,11 @@ Supports: UR-WP-01, UR-WP-02, UR-WP-03, UR-APT-01, UR-WOP-01
 Collaborators: Planner[1]
 """
 
-from Planner import Planner
-from WorkoutPlan import WorkoutPlan
-from Session import Session
+import json
+from pathlib import Path
 
+from classes.Planner import Planner
+from classes.Session import Session
 
 class User:
     """
@@ -16,34 +17,27 @@ class User:
     A User owns workout plans and workout session history.
     """
 
-    def __init__(self, user_id: str, name: str, email: str):
-        self._user_id: str = user_id
-        self._name: str = name
-        self._email: str = email
+    def __init__(self, user_name: str):
         self._planner: Planner = Planner()
-
-    # ------------------------
-    # Workout Plan Management
-    # ------------------------
-
-    def add_workout_plan(self, plan: WorkoutPlan) -> None:
-        """Adds a workout plan to the user's planner."""
-        self._planner.add_plan(plan)
-
-    def get_plans(self) -> list[WorkoutPlan]:
-        """Returns all workout plans owned by the user."""
-        return self._planner.list_plans()
+        self._user_name: str = user_name
+        with open(Path(__file__).parent / "../data/users.json", "r") as f:
+            data = json.load(f)
+            if(user_name in data):
+                self._name: str = data[user_name]["name"]
+                self._email: str = data[user_name]["email"]
+                return
+        self._name: str = input("Enter your name: ")
+        self._email: str = input("Enter your email: ")
+        self.update_profile(self._name, self._email)
 
     # ------------------------
     # Session Management
     # ------------------------
 
     def add_session(self, session: Session) -> None:
-        """Logs a completed workout session."""
         self._planner.log_workout(session)
 
     def get_sessions(self) -> list[Session]:
-        """Returns all logged workout sessions."""
         return self._planner.get_logs()
 
     # ------------------------
@@ -51,18 +45,18 @@ class User:
     # ------------------------
 
     def update_profile(self, name: str, email: str) -> None:
-        """Updates the user's profile information."""
         self._name = name
         self._email = email
+        with open(Path(__file__).parent / "../data/users.json", "r+") as f:
+            data = json.load(f)
+            data[self._user_name] = {"name": self._name, "email": self._email}
+            f.seek(0)
+            json.dump(data, f, indent=4)
+            f.truncate()
+
 
     def get_user_info(self) -> dict:
-        """Returns basic user information."""
-        return {"user_id": self._user_id, "name": self._name, "email": self._email}
-
-    # ------------------------
-    # Planner Access
-    # ------------------------
+        return {"user_name": self._user_name, "name": self._name, "email": self._email}
 
     def get_planner(self) -> Planner:
-        """Returns the associated planner."""
         return self._planner
