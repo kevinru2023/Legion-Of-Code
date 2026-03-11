@@ -5,9 +5,9 @@ Supports EP-WOP-01, UR-IID-01, UR-APT-03, UR-APT-02, UR-APT-01
 Collaborators: Planner[1]
 """
 
-from Planner import Planner
-from Session import Session
-from WorkoutPlan import WorkoutPlan
+from .Planner import Planner
+from .Session import Session
+from .WorkoutPlan import WorkoutPlan
 
 ALLOWED_WEEKDAYS = {"sun", "mon", "tues", "wed", "thurs", "fri", "sat"}
 
@@ -43,7 +43,7 @@ class Viewer:
     def view_logs(self) -> None:
         self._logs_cli(self._planner.get_logs())
 
-    def select_workout_plan(self) -> WorkoutPlan | None:
+    def select_workout_plan(self) -> WorkoutPlan:
         plans = self._planner.list_plans()
         return self._select_plan_cli(plans)
 
@@ -56,41 +56,53 @@ class Viewer:
         self._edit_plan_cli(plan)
         self._planner.save_plans()
 
+    def set_user(self, user) -> None:
+        if not user:
+            raise ValueError("No user cannot initialize Viewer")
+        self._user = user
+
     def _view_workout_session(self, session: Session) -> None:
-        day = getattr(session, "_day", "")
-        notes = getattr(session, "_notes", "")
+        day = session.day
+        notes = session.notes
 
         try:
-            workout = getattr(session, "_workout", None).name
+            workout = session.workout.name
         except Exception as e:
             workout = None
 
-        intensity = getattr(session, "_percieved_intensity", 0)
-        print(f"day={day}, workout={workout}, intensity={intensity}, notes={notes}")
+        intensity = session.percieved_intensity
+        print(f"Day: {day}, Workout: {workout}, Intensity: {intensity}, Notes: {notes}")
 
-    def _logs_cli(self, logs=None) -> None:
+    def _logs_cli(self, logs: list[Session] = None) -> None:
         if not logs:
             print("No workout logs")
             return
 
-        print("\nWorkout logs:")
+        # print workout logs
+        # e.g 1. ID: 1, Day: Wednesday
+        #     2. ID: 2, Day: Thursday
+        print("Workout logs:")
         for index, session in enumerate(logs, start=1):
-            print(f"{index}. id={getattr(session, 'id', None)} day={getattr(session, 'day', '')}")
+            print(f"{index}. ID: {session.id}, Day: {session.day}, Notes: {session.notes}, RPE: {session.percieved_intensity}")
 
-    def _select_plan_cli(self, plans=None) -> WorkoutPlan | None:
+    def _select_plan_cli(self, plans=None) -> WorkoutPlan:
         if not plans:
             return None
 
-        print("\nSelect workout plan:")
+        print("Select workout plan:")
         for index, plan in enumerate(plans, start=1):
-            days = list(getattr(plan, "_workout_plan", {}).keys())
-            print(f"{index}. days={days}")
+            # get workout plan keys (days of week)
+            days = list(plan.workout_plan.keys())
+            print(f"{index}. Days: {days}")
 
+        # index into days to select plan
         raw = input("Enter number: ").strip()
         if raw.isdigit():
             selected = int(raw)
             if 1 <= selected <= len(plans):
                 return plans[selected - 1]
+            else:
+                print("Invalid selection")
 
         return None
 
@@ -99,18 +111,19 @@ class Viewer:
             print("No saved workout plans")
             return
 
-        print("\nSaved workout plans:")
+        print("Saved workout plans:")
+        # list out workouts
         for index, plan in enumerate(plans, start=1):
-            data = getattr(plan, "_workout_plan", {})
+            data = plan.workout_plan
             print(f"{index}. {data}")
 
-    def _log_workout_cli(self) -> Session | None:
+    def _log_workout_cli(self) -> Session:
         day = self._prompt_weekday("Workout day (sun/mon/tues/wed/thurs/fri/sat): ")
         if day is None:
             return None
 
         notes = input("Notes: ").strip()
-        intensity = self._input_int("Perceived intensity 1-10: ", default=0)
+        intensity = self._input_int("Perceived intensity 1-10: ")
 
         session = Session()
         session._day = day
@@ -119,7 +132,7 @@ class Viewer:
         session._id = len(self._planner.get_logs()) + 1
         return session
 
-    def _create_plan_cli(self) -> WorkoutPlan | None:
+    def _create_plan_cli(self) -> WorkoutPlan:
         plan = WorkoutPlan()
 
         print("Create plan. Leave weekday empty to finish")
@@ -139,9 +152,9 @@ class Viewer:
 
         return plan
 
-    def _edit_plan_cli(self, plan: WorkoutPlan) -> None:
-        print("\nCurrent plan:")
-        print(getattr(plan, "_workout_plan", {}))
+    def _edit_plan_cli(self, plan: WorkoutPlan):
+        print("Current plan:")
+        print(plan.workout_plan)
 
         day = self._prompt_weekday("Day to edit (sun/mon/tues/wed/thurs/fri/sat): ")
         action = input("Type 'remove' to remove day, otherwise press Enter to replace workouts: ").strip().lower()
@@ -161,13 +174,6 @@ class Viewer:
 
         plan._workout_plan[day] = [exercise]
         print("Plan updated")
-
-    def set_user(self, user) -> None:
-        self._user = user
-        if user is not None and hasattr(user, "_planner"):
-            self._planner = user._planner
-        else:
-            self._planner = Planner(user)
 
     def _input_int(self, prompt: str, default: int = 0) -> int:
         raw = input(prompt).strip()
@@ -193,7 +199,7 @@ class Viewer:
             "video_id": video_id,
         }
 
-    def _prompt_weekday(self, prompt: str, allow_empty: bool = False) -> str | None:
+    def _prompt_weekday(self, prompt: str, allow_empty: bool = False) -> str:
         while True:
             day = input(prompt).strip().lower()
 
@@ -204,3 +210,4 @@ class Viewer:
                 return day
 
             print("Invalid weekday. Use: sun, mon, tues, wed, thurs, fri, sat")
+

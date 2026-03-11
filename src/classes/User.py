@@ -8,9 +8,9 @@ Collaborators: Planner[1]
 import json
 from pathlib import Path
 
-from Planner import Planner
-from WorkoutPlan import WorkoutPlan
-from Session import Session
+from .Planner import Planner
+from .WorkoutPlan import WorkoutPlan
+from .Session import Session
 
 class User:
     """
@@ -104,4 +104,5 @@ class User:
         data_dir = Path(__file__).resolve().parent.parent / "prog-data"
         data_dir.mkdir(parents=True, exist_ok=True)
         return data_dir / f"{self._user_id}.info"
+
 
