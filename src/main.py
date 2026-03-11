@@ -36,8 +36,7 @@ def main():
         elif choice == "2":
             viewer.view_plans()
         elif choice == "3":
-            plan = viewer._create_plan_cli()
-            viewer._planner.add_plan(plan)
+            viewer.edit_plan()
         elif choice == "4":
             viewer.log_workout()
         elif choice == "5":
