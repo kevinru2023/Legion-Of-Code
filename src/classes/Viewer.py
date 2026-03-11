@@ -5,74 +5,202 @@ Supports EP-WOP-01, UR-IID-01, UR-APT-03, UR-APT-02, UR-APT-01
 Collaborators: Planner[1]
 """
 
+from Planner import Planner
+from Session import Session
+from WorkoutPlan import WorkoutPlan
+
+ALLOWED_WEEKDAYS = {"sun", "mon", "tues", "wed", "thurs", "fri", "sat"}
+
 
 class Viewer:
     """
-    This will probably exist in the frontend in some ohter language/framework; this
-    "code" is just a tentative outline for the structure of how that class will be implemented.
+    Manages workout plans/logs through CLI menu
     """
 
-    def __init__(self):
-        # set config (darkmode, layout, etc)...
-
-        self._planner = Planner()
+    def __init__(self, user=None):
+        self.set_user(user)
 
     def create_plan(self) -> None:
-        # display workout plan editor and construct WorkoutPlan obj
-        plan = _create_gui()
+        plan = self._create_plan_cli()
 
-        # pass plan to Planner
+        if plan is None:
+            return
+
         self._planner.add_plan(plan)
 
     def view_plans(self) -> None:
-        # load all plans
         plans = self._planner.list_plans()
-
-        # display all plans in GUI
-        _view_gui(plans)
+        self._view_plans_cli(plans)
 
     def log_workout(self) -> None:
-        # display GUI for user to log workout and construct session object
-        session = _log_workout_gui()
+        session = self._log_workout_cli()
 
-        # log workout to planner
+        if session is None:
+            return
+
         self._planner.log_workout(session)
 
     def view_logs(self) -> None:
-        # pullup log viewer/editor
-        _logs_gui()
+        self._logs_cli(self._planner.get_logs())
 
-    def select_workout_plan(self) -> WorkoutPlan:
-        # load all plans
+    def select_workout_plan(self) -> WorkoutPlan | None:
         plans = self._planner.list_plans()
+        return self._select_plan_cli(plans)
 
-        # display all plans for selection
-        return _select_gui(plans)
+    def edit_plan(self) -> None:
+        plan = self.select_workout_plan()
+        if plan is None:
+            print("No plan selected")
+            return
 
-    def _view_workout_session(session: Session) -> None:
-        # display session info
-        pass
+        self._edit_plan_cli(plan)
+        self._planner.save_plans()
 
-    def _logs_gui(self) -> None:
-        # display gui for viewing/editing logs
-        pass
+    def _view_workout_session(self, session: Session) -> None:
+        day = getattr(session, "_day", "")
+        notes = getattr(session, "_notes", "")
 
-    # note: this will entail viewing videos, which will likely
-    # need to be stored remotely
-    def _select_plan_gui(self) -> None:
-        # let user select plan
-        pass
+        try:
+            workout = getattr(session, "_workout", None).name
+        except Exception as e:
+            workout = None
 
-    # note: this will entail viewing videos, which will likely
-    # need to be stored remotely
-    def _view_plans_gui(self) -> None:
-        # display plans for viewing
-        pass
+        intensity = getattr(session, "_percieved_intensity", 0)
+        print(f"day={day}, workout={workout}, intensity={intensity}, notes={notes}")
 
-    def _log_workout_gui(self) -> Session:
-        # display gui for constructing workout session
-        pass
+    def _logs_cli(self, logs=None) -> None:
+        if not logs:
+            print("No workout logs")
+            return
 
-    def _create_plan_gui(self) -> WorkoutPlan:
-        # display gui for creating a WorkoutPlan
-        pass
+        print("\nWorkout logs:")
+        for index, session in enumerate(logs, start=1):
+            print(f"{index}. id={getattr(session, 'id', None)} day={getattr(session, 'day', '')}")
+
+    def _select_plan_cli(self, plans=None) -> WorkoutPlan | None:
+        if not plans:
+            return None
+
+        print("\nSelect workout plan:")
+        for index, plan in enumerate(plans, start=1):
+            days = list(getattr(plan, "_workout_plan", {}).keys())
+            print(f"{index}. days={days}")
+
+        raw = input("Enter number: ").strip()
+        if raw.isdigit():
+            selected = int(raw)
+            if 1 <= selected <= len(plans):
+                return plans[selected - 1]
+
+        return None
+
+    def _view_plans_cli(self, plans=None) -> None:
+        if not plans:
+            print("No saved workout plans")
+            return
+
+        print("\nSaved workout plans:")
+        for index, plan in enumerate(plans, start=1):
+            data = getattr(plan, "_workout_plan", {})
+            print(f"{index}. {data}")
+
+    def _log_workout_cli(self) -> Session | None:
+        day = self._prompt_weekday("Workout day (sun/mon/tues/wed/thurs/fri/sat): ")
+        if day is None:
+            return None
+
+        notes = input("Notes: ").strip()
+        intensity = self._input_int("Perceived intensity 1-10: ", default=0)
+
+        session = Session()
+        session._day = day
+        session._notes = notes
+        session._percieved_intensity = intensity
+        session._id = len(self._planner.get_logs()) + 1
+        return session
+
+    def _create_plan_cli(self) -> WorkoutPlan | None:
+        plan = WorkoutPlan()
+
+        print("Create plan. Leave weekday empty to finish")
+        while True:
+            day = self._prompt_weekday("Day (sun/mon/tues/wed/thurs/fri/sat): ", allow_empty=True)
+            if day is None:
+                break
+
+            exercise = self._input_exercise()
+            if exercise is None:
+                continue
+
+            if day not in plan._workout_plan:
+                plan._workout_plan[day] = []
+
+            plan._workout_plan[day].append(exercise)
+
+        return plan
+
+    def _edit_plan_cli(self, plan: WorkoutPlan) -> None:
+        print("\nCurrent plan:")
+        print(getattr(plan, "_workout_plan", {}))
+
+        day = self._prompt_weekday("Day to edit (sun/mon/tues/wed/thurs/fri/sat): ")
+        action = input("Type 'remove' to remove day, otherwise press Enter to replace workouts: ").strip().lower()
+
+        if action == "remove":
+            if day in plan._workout_plan:
+                del plan._workout_plan[day]
+                print("Day removed")
+            else:
+                print("Day not found in plan")
+            return
+
+        exercise = self._input_exercise()
+        if exercise is None:
+            print("No changes made")
+            return
+
+        plan._workout_plan[day] = [exercise]
+        print("Plan updated")
+
+    def set_user(self, user) -> None:
+        self._user = user
+        if user is not None and hasattr(user, "_planner"):
+            self._planner = user._planner
+        else:
+            self._planner = Planner(user)
+
+    def _input_int(self, prompt: str, default: int = 0) -> int:
+        raw = input(prompt).strip()
+        if raw.isdigit():
+            return int(raw)
+        return default
+
+    def _input_exercise(self) -> dict | None:
+        name = input("Workout name: ").strip()
+        if name == "":
+            return None
+
+        reps = self._input_int("Reps: ", default=0)
+        sets = self._input_int("Sets: ", default=0)
+        rest_time = self._input_int("Rest time (seconds): ", default=0)
+        video_id = input("Video id: ").strip()
+
+        return {
+            "name": name,
+            "reps": reps,
+            "sets": sets,
+            "rest_time": rest_time,
+            "video_id": video_id,
+        }
+
+    def _prompt_weekday(self, prompt: str, allow_empty: bool = False) -> str | None:
+        while True:
+            day = input(prompt).strip().lower()
+
+            if day == "" and allow_empty:
+                return None
+
+            if day in ALLOWED_WEEKDAYS:
+                return day
+
+            print("Invalid weekday. Use: sun, mon, tues, wed, thurs, fri, sat")

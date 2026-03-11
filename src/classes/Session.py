@@ -5,6 +5,7 @@ Supports: EP-WOP-01, UR-APT-03, UR-APT-02, UR-APT-01
 Collaborators: Workout[1]
 """
 
+from models.Workout import Workout
 
 class Session:
     def __init__(self):
@@ -31,7 +32,7 @@ class Session:
         return self._percieved_intensity
 
     @property
-    def workout(self):
+    def workout(self) -> Workout:
         return self._workout
 
     def store_notes(self, notes: str) -> None:
