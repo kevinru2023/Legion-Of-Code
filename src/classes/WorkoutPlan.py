@@ -13,9 +13,11 @@ Collaborators: Workout[0..7] (since there is 7 days in the week)
 
 class WorkoutPlan:
     def __init__(self):
-        
-        # probably will need 
-        self._workout_plan = defaultdict(list)  # Init an empty dict for workout plan where Keys = Day of the week and Values = workout (probably will be class)
+
+        # probably will need
+        self._workout_plan = defaultdict(
+            list
+        )  # Init an empty dict for workout plan where Keys = Day of the week and Values = workout (probably will be class)
 
     @property
     def workout_plan(self) -> dict:
@@ -30,10 +32,7 @@ class WorkoutPlan:
         self._workout_plan[day].append(workout)
 
     def to_dict(self) -> dict:
-        return {
-            day: [asdict(w) for w in workouts]
-            for day, workouts in self._workout_plan.items()
-        }
+        return {day: [asdict(w) for w in workouts] for day, workouts in self._workout_plan.items()}
 
     @classmethod
     def from_dict(cls, data: dict) -> "WorkoutPlan":
@@ -45,10 +44,17 @@ class WorkoutPlan:
 
     # Will calculate if a rest day is needed in the user's current workout plan i.e. if they have 5 days in a row of working out
     def calculate_rest_day(self) -> bool:
+        week = ["sun", "mon", "tues", "wed", "thurs", "fri", "sat"]
+        streak = 0
+        for day in week:
+            if day in self._workout_plan and self._workout_plan[day]:
+                streak += 1
+                if streak >= 5:
+                    return True
+            else:
+                streak = 0
         return False
 
     # Will calcuate which muslce groups are being undertrained or over trained in the current user's plan
-    def calculate_muscle_group_balance(self) -> dict[str,int] | None:
+    def calculate_muscle_group_balance(self) -> dict[str, int] | None:
         return None
-
-    

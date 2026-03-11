@@ -14,8 +14,9 @@ class SuggestionEngine:
         pass
 
     def suggest_rest_day(self, workoutplan) -> str:
-        # Will determin if rest is needed based on workout streak
-        pass
+        if workoutplan.calculate_rest_day():
+            return "You have 5+ consecutive workout days. Consider adding a rest day."
+        return "Your workout looks balanced. No rest needed."
 
     def suggest_muscle_group(self, workoutplan) -> str:
         # Will determine which muscle groups should be worked next based on their frequency and last day worked
