@@ -17,8 +17,8 @@ class User:
     A User owns workout plans and workout session history.
     """
 
-    def __init__(self, user_name: str):
-        self._planner: Planner = Planner()
+    def __init__(self, user_name: str, planner: Planner):
+        self._planner: Planner = planner
         self._user_name: str = user_name
         with open(Path(__file__).parent / "../data/users.json", "r") as f:
             data = json.load(f)

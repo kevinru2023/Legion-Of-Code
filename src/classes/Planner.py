@@ -5,23 +5,70 @@ Supports EP-WOP-01, UR-APT-03, UR-APT-02, UR-APT-01, UR-BRBS
 Collaborators: WorkoutPlan[0..*], Session [0..*]
 """
 
+import json
+from pathlib import Path
+
 from classes.WorkoutPlan import WorkoutPlan
 from classes.Session import Session
 from models.Workout import Workout
+
+WORKOUT_PLAN_FILE = Path(__file__).parent / ".." / "data" / "workout-plan.json"
 
 class Planner:
     def __init__(self):
         self._plans: list[WorkoutPlan] = []
         self._logs: list[Session] = []
         self._workouts: list[Workout] = []
+        self._load_plans()
+
+    def _load_plans(self) -> None:
+        try:
+            content: str = WORKOUT_PLAN_FILE.read_text().strip()
+            if not content:
+                return
+            data: dict = json.loads(content)
+            for plan_id, days in data.items():
+                plan = WorkoutPlan(id=int(plan_id))
+                for day, workouts in days.items():
+                    for w in workouts:
+                        plan.add_workout(day, Workout(
+                            name=w["name"],
+                            reps=w["reps"],
+                            sets=w["sets"],
+                            rest_time=w["rest_time"],
+                            video_id=w["video_id"],
+                        ))
+                self._plans.append(plan)
+        except (FileNotFoundError, json.JSONDecodeError):
+            pass
+
+    def _save_plans(self) -> None:
+        data: dict = {}
+        for plan in self._plans:
+            data[str(plan.id)] = {
+                day: [
+                    {
+                        "name": w.name,
+                        "reps": w.reps,
+                        "sets": w.sets,
+                        "rest_time": w.rest_time,
+                        "video_id": w.video_id,
+                    }
+                    for w in workouts
+                ]
+                for day, workouts in plan.workout_plan.items()
+            }
+        WORKOUT_PLAN_FILE.write_text(json.dumps(data, indent=4))
 
     def add_plan(self, plan: WorkoutPlan) -> None:
         self._plans.append(plan)
+        self._save_plans()
 
     def remove_plan(self, id: int) -> None:
         for i, plan in enumerate(self._plans):
             if plan.id == id:
                 del self._plans[i]
+                self._save_plans()
                 return
 
     def list_plans(self) -> list[WorkoutPlan]:

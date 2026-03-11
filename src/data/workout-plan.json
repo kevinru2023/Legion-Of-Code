@@ -1,0 +1,67 @@
+{
+    "0": {
+        "Monday": [
+            {
+                "name": "Bicep Curls",
+                "reps": 10,
+                "sets": 3,
+                "rest_time": 30,
+                "video_id": "vid1"
+            }
+        ],
+        "Tuesday": [
+            {
+                "name": "Pullups",
+                "reps": 8,
+                "sets": 4,
+                "rest_time": 60,
+                "video_id": "vid2"
+            }
+        ],
+        "Wednesday": [
+            {
+                "name": "Overhead Press",
+                "reps": 12,
+                "sets": 3,
+                "rest_time": 120,
+                "video_id": "vid3"
+            }
+        ],
+        "Thursday": [
+            {
+                "name": "Barbell Rows",
+                "reps": 12,
+                "sets": 4,
+                "rest_time": 60,
+                "video_id": "vid4"
+            }
+        ],
+        "Friday": [
+            {
+                "name": "Deadlifts",
+                "reps": 5,
+                "sets": 5,
+                "rest_time": 60,
+                "video_id": "vid5"
+            }
+        ],
+        "Saturday": [
+            {
+                "name": "Squats",
+                "reps": 10,
+                "sets": 4,
+                "rest_time": 120,
+                "video_id": "vid6"
+            }
+        ],
+        "Sunday": [
+            {
+                "name": "Bench Press",
+                "reps": 10,
+                "sets": 3,
+                "rest_time": 60,
+                "video_id": "vid7"
+            }
+        ]
+    }
+}
