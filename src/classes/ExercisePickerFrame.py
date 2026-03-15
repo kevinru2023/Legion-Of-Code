@@ -33,4 +33,5 @@ class ExercisePickerFrame:
             sets=ex["sets"],
             rest_time=ex["rest_time"],
             video_id=ex["video_id"],
+            muscle_group=ex["muscle_group"],
         )

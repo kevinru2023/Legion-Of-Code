@@ -155,10 +155,23 @@ class Viewer:
 
         plans = self._planner.list_plans()
         engine = SuggestionEngine()
-        text = engine.suggest_rest_day(plans[0]) if plans else "No workout plan found."
 
-        ttk.Label(self._pageContent, text="Suggestion", font=("Helvetica", 13, "bold")).pack(pady=(20, 10))
-        ttk.Label(self._pageContent, text=str(text), wraplength=480, justify="center").pack()
+        ttk.Label(self._pageContent, text="Suggestions", font=("Helvetica", 13, "bold")).pack(pady=(20, 10))
+
+        if not plans:
+            ttk.Label(self._pageContent, text="No workout plan found.", wraplength=480, justify="center").pack()
+            return
+
+        rest_text = engine.suggest_rest_day(plans[0])
+        muscle_text = engine.suggest_muscle_group(plans[0])
+
+        ttk.Label(self._pageContent, text="Rest Day", font=("Helvetica", 11, "bold")).pack(anchor="w", padx=20, pady=(10, 2))
+        ttk.Label(self._pageContent, text=rest_text, wraplength=480, justify="left").pack(anchor="w", padx=30)
+
+        ttk.Separator(self._pageContent, orient="horizontal").pack(fill="x", padx=20, pady=10)
+
+        ttk.Label(self._pageContent, text="Muscle Groups", font=("Helvetica", 11, "bold")).pack(anchor="w", padx=20, pady=(0, 2))
+        ttk.Label(self._pageContent, text=muscle_text, wraplength=480, justify="left").pack(anchor="w", padx=30)
 
     def view_statistics(self) -> None:
         for w in self._pageContent.winfo_children():

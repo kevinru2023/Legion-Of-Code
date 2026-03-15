@@ -19,5 +19,14 @@ class SuggestionEngine:
         return "Your workout looks balanced. No rest needed."
 
     def suggest_muscle_group(self, workoutplan) -> str:
-        # Will determine which muscle groups should be worked next based on their frequency and last day worked
-        pass
+        ALL_GROUPS = {"chest", "back", "legs", "shoulders", "triceps"}
+        counts = workoutplan.calculate_muscle_group_balance()
+        if counts is None:
+            return "No workout plan found to analyze."
+
+        unworked = ALL_GROUPS - counts.keys()
+        if unworked:
+            return f"You haven't trained these muscle groups yet: {', '.join(sorted(unworked))}. Consider adding them to your plan."
+
+        least_worked = min(counts, key=counts.get)
+        return f"All muscle groups are covered. Consider adding more '{least_worked}' work — it's your least trained group ({counts[least_worked]} exercise(s))."
