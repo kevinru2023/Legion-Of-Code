@@ -11,6 +11,7 @@ from .ProgressAnalyzer import ProgressAnalyzer
 from .User import User
 
 import tkinter as tk
+import webbrowser
 from tkinter import messagebox, ttk
 
 from .ExercisePickerFrame import ExercisePickerFrame
@@ -120,7 +121,13 @@ class Viewer:
             for day, workouts in plan.workout_plan.items():
                 ttk.Label(inner, text=f"  {day}", font=("Helvetica", 10, "bold")).pack(anchor="w")
                 for w in workouts:
-                    ttk.Label(inner,text=f"      * {w.name}  |  {w.sets}x{w.reps}  |  rest {w.rest_time}s").pack(anchor="w")
+                    row = ttk.Frame(inner)
+                    row.pack(anchor="w")
+                    ttk.Label(row, text=f"      * {w.name}  |  {w.sets}x{w.reps}  |  rest {w.rest_time}s").pack(side="left")
+
+                    # button to link to video tutorial
+                    tk.Button(row, text="View Exercise Tutorial", fg="#1155cc", bg="#efefef", relief="flat", cursor="hand2",
+                              font=("Helvetica", 9, "underline"), command=lambda url=w.video_id: webbrowser.open(url)).pack(side="left", padx=6)
 
     def log_workout(self) -> None:
         LogWorkoutDialog(self._window, self._planner)
