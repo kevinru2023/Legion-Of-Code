@@ -141,19 +141,22 @@ class Viewer:
             ttk.Label(self._pageContent, text="No workout logs yet.").pack(expand=True)
             return
 
-        cols = ("ID", "Day", "RPE", "Workout", "Notes")
+        cols = ("Week", "Day", "RPE", "Workout", "Notes")
         tree = ttk.Treeview(self._pageContent, columns=cols, show="headings", height=18)
-        widths = (40, 70, 50, 160, 220)
+        widths = (50, 70, 50, 160, 220)
         for col, w in zip(cols, widths):
             tree.heading(col, text=col)
             tree.column(col, width=w, anchor="center")
 
-        for s in logs:
-            tree.insert("", "end", values=(s.id, s.day, s._perceived_intensity, s.workout.name, s.notes))
+        day_order = {"Mon": 0, "Tues": 1, "Wed": 2, "Thurs": 3, "Fri": 4, "Sat": 5, "Sun": 6}
+        for s in sorted(logs, key=lambda s: (s.week, day_order.get(s.day, 7))):
+            tree.insert("", "end", values=(s.week or "—", s.day, s.perceived_intensity, s.workout.name if s.workout else "—", s.notes))
 
         vsb = ttk.Scrollbar(self._pageContent, orient="vertical", command=tree.yview)
-        tree.configure(yscrollcommand=vsb.set)
+        hsb = ttk.Scrollbar(self._pageContent, orient="horizontal", command=tree.xview)
+        tree.configure(yscrollcommand=vsb.set, xscrollcommand=hsb.set)
         vsb.pack(side="right", fill="y")
+        hsb.pack(side="bottom", fill="x")
         tree.pack(fill="both", expand=True)
 
     def view_suggestion(self) -> None:

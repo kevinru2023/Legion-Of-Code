@@ -10,7 +10,7 @@ from datetime import date as date_type
 from models.Workout import Workout
 
 class Session:
-    def __init__(self, id: int, day: str, notes: str, perceived_intensity: int, workout: Workout | None= None, date: date_type | None= None, duration_minutes: int = 0):
+    def __init__(self, id: int, day: str, notes: str, perceived_intensity: int, workout: Workout | None= None, date: date_type | None= None, duration_minutes: int = 0, week: int = 0):
         self._id: int = id
         self._day: str = day
         self._notes: str = notes
@@ -19,6 +19,7 @@ class Session:
         self._workout: Workout | None = workout
         self._date: date_type | None = date               # Added for ProgressAnalyzer
         self._duration_minutes: int = duration_minutes  # Added for ProgressAnalyzer
+        self._week: int = week
 
     @property
     def id(self) -> int:
@@ -47,6 +48,10 @@ class Session:
     @property
     def duration_minutes(self) -> int:             # Added for ProgressAnalyzer
         return self._duration_minutes
+
+    @property
+    def week(self) -> int:
+        return self._week
 
     def load_data(self):
         file = Path(f"session_{self._id}.json")

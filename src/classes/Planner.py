@@ -100,6 +100,7 @@ class Planner:
                 "day": session.day,
                 "notes": session.notes,
                 "perceived_intensity": session.perceived_intensity,
+                "week": session.week,
                 # serialize workout fields so we can reconstruct it on load; None if no workout was linked
                 "workout": {"name": w.name, "reps": w.reps, "sets": w.sets, "rest_time": w.rest_time, "video_id": w.video_id} if w else None,
             })
@@ -130,6 +131,7 @@ class Planner:
                 notes=item.get("notes", ""),
                 perceived_intensity=item.get("perceived_intensity", 0),
                 workout=workout,
+                week=item.get("week", 0),
             )
             self._log.append(session)
 

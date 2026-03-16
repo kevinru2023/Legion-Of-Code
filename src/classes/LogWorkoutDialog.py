@@ -36,6 +36,11 @@ class LogWorkoutDialog:
         ttk.Spinbox(f, from_=1, to=10, textvariable=self._intensity,
                     width=5).grid(row=2, column=1, sticky="w", padx=5)
 
+        ttk.Label(f, text="Week:").grid(row=3, column=0, sticky="w", pady=4)
+        self._week = tk.IntVar(value=1)
+        ttk.Spinbox(f, from_=1, to=52, textvariable=self._week,
+                    width=5).grid(row=3, column=1, sticky="w", padx=5)
+
         self._picker = ExercisePickerFrame(self.window)
         self._picker.frame.pack(fill="both", expand=True, padx=10, pady=5)
 
@@ -58,6 +63,7 @@ class LogWorkoutDialog:
             workout=self._picker.get_workout(),
             date=None,
             duration_minutes=0,
+            week=self._week.get(),
         )
         self._planner.log_workout(session)
         messagebox.showinfo("Logged", "Workout logged!", parent=self.window)
