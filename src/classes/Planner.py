@@ -100,8 +100,15 @@ class Planner:
                 "day": session.day,
                 "notes": session.notes,
                 "perceived_intensity": session.perceived_intensity,
+                "duration_minutes": getattr(session, "_duration_minutes", 0),
                 # serialize workout fields so we can reconstruct it on load; None if no workout was linked
-                "workout": {"name": w.name, "reps": w.reps, "sets": w.sets, "rest_time": w.rest_time, "video_id": w.video_id} if w else None,
+                "workout": {
+                    "name": w.name,
+                    "reps": w.reps,
+                    "sets": w.sets,
+                    "rest_time": w.rest_time,
+                    "video_id": w.video_id,
+                } if w else None,
             })
 
         path.write_text(json.dumps(data, indent=2), encoding="utf-8")
@@ -130,6 +137,8 @@ class Planner:
                 notes=item.get("notes", ""),
                 perceived_intensity=item.get("perceived_intensity", 0),
                 workout=workout,
+                date=None,
+                duration_minutes=item.get("duration_minutes", 0),
             )
             self._log.append(session)
 
