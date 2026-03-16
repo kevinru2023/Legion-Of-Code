@@ -7,12 +7,14 @@ import json
 import tkinter as tk
 from tkinter import ttk
 
+from pathlib import Path
 from models.Workout import Workout
 
 
 class ExercisePickerFrame:
     def __init__(self, parent):
-        with open("data/exercises.json") as f:
+        data_path = Path(__file__).parent.parent / "data" / "exercises.json"
+        with open(data_path) as f:
             self._exercises = json.load(f)
 
         self.frame = ttk.LabelFrame(parent, text="Select Exercise")
