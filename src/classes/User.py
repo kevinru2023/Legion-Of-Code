@@ -54,7 +54,7 @@ class User:
 
     def update_profile(self, name: str, email: str) -> None:
         """Updates the user's profile information"""
-        self._name = name
+        self._username = username
         self._email = email
         self.save_credentials()
 
