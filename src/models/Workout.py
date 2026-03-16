@@ -19,3 +19,4 @@ class Workout:
     sets: int
     rest_time: int
     video_id: str
+    muscle_group: str = "unknown"

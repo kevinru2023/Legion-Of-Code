@@ -8,6 +8,7 @@ from tkinter import messagebox, ttk
 
 from .WorkoutPlan import WorkoutPlan
 from .ExercisePickerFrame import ExercisePickerFrame
+from .SuggestionEngine import SuggestionEngine
 
 WEEKDAYS = ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"]
 
@@ -19,6 +20,7 @@ class CreatePlanDialog:
         self.window.resizable(False, False)
         self._planner = planner
         self._plan = WorkoutPlan()
+        self._engine = SuggestionEngine()
 
         top = ttk.Frame(self.window, padding=10)
         top.pack(fill="x")
@@ -33,6 +35,11 @@ class CreatePlanDialog:
         summary_frame.pack(fill="both", padx=10, pady=5)
         self._summary = tk.Text(summary_frame, height=5, state="disabled", font=("Courier", 9))
         self._summary.pack(fill="both")
+
+        suggestion_frame = ttk.LabelFrame(self.window, text="Suggestions", padding=5)
+        suggestion_frame.pack(fill="x", padx=10, pady=5)
+        self._suggestion_text = ttk.Label(suggestion_frame, text="Add exercises to see suggestions.", wraplength=380, justify="left")
+        self._suggestion_text.pack(anchor="w")
 
         btns = ttk.Frame(self.window, padding=(10, 0, 10, 10))
         btns.pack(fill="x")
@@ -53,6 +60,12 @@ class CreatePlanDialog:
         self._summary.config(state="normal")
         self._summary.insert("end", f"{day:6s} → {exercise.name}\n")
         self._summary.config(state="disabled")
+        self._refresh_suggestions()
+
+    def _refresh_suggestions(self):
+        rest = self._engine.suggest_rest_day(self._plan)
+        muscle = self._engine.suggest_muscle_group(self._plan)
+        self._suggestion_text.config(text=f"Rest: {rest}\n\nMuscle Groups: {muscle}")
 
     def _save(self):
         if not self._plan._workout_plan:

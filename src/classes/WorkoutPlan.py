@@ -44,7 +44,7 @@ class WorkoutPlan:
 
     # Will calculate if a rest day is needed in the user's current workout plan i.e. if they have 5 days in a row of working out
     def calculate_rest_day(self) -> bool:
-        week = ["sun", "mon", "tues", "wed", "thurs", "fri", "sat"]
+        week = ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"]
         streak = 0
         for day in week:
             if day in self._workout_plan and self._workout_plan[day]:
@@ -57,4 +57,11 @@ class WorkoutPlan:
 
     # Will calcuate which muslce groups are being undertrained or over trained in the current user's plan
     def calculate_muscle_group_balance(self) -> dict[str, int] | None:
-        return None
+        if not self._workout_plan:
+            return None
+        counts: dict[str, int] = {}
+        for workouts in self._workout_plan.values():
+            for workout in workouts:
+                group = workout.muscle_group
+                counts[group] = counts.get(group, 0) + 1
+        return counts
