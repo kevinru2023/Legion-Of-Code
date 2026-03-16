@@ -149,7 +149,7 @@ class Viewer:
             tree.column(col, width=w, anchor="center")
 
         for s in logs:
-            tree.insert("", "end", values=(s.id, s.day, s._perceived_intensity, s.workout, s.notes))
+            tree.insert("", "end", values=(s.id, s.day, s._perceived_intensity, s.workout.name, s.notes))
 
         vsb = ttk.Scrollbar(self._pageContent, orient="vertical", command=tree.yview)
         tree.configure(yscrollcommand=vsb.set)

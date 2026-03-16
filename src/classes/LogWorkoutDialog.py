@@ -49,6 +49,7 @@ class LogWorkoutDialog:
         if not day:
             messagebox.showerror("Missing day", "Please choose a day.", parent=self.window)
             return
+
         session = Session(
             id=len(self._planner.get_logs()) + 1,
             day=day,

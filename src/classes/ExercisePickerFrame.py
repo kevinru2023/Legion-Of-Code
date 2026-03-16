@@ -23,15 +23,15 @@ class ExercisePickerFrame:
         self._listbox.pack(fill="both", expand=True, padx=5, pady=5)
         self._listbox.bind("<<ListboxSelect>>", self._on_select)
 
-        self._btn = tk.Button(self.frame, text="", fg="#1155cc", bg="#efefef", state="disabled", relief="flat", cursor="hand2", font=("Helvetica", 9, "underline"))
-        self._btn.pack(anchor="w", padx=5, pady=(0, 4))
+        self._btn = tk.Button(self.frame, fg="#1155cc", bg="#efefef", relief="flat", cursor="hand2", font=("Helvetica", 9, "underline"))
 
     def _on_select(self, _):
         sel = self._listbox.curselection()
         if not sel:
             return
         url = self._exercises[self._listbox.get(sel[0])]["video_id"]
-        self._btn.config(text="View Exercise Tutorial", state="normal", command=lambda: webbrowser.open(url))
+        self._btn.config(text="View Exercise Tutorial", command=lambda: webbrowser.open(url))
+        self._btn.pack(anchor="w", padx=5, pady=(0, 4))
 
     def get_workout(self) -> Workout | None:
         sel = self._listbox.curselection()
