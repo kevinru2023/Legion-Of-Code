@@ -123,7 +123,7 @@ class Viewer:
                     ttk.Label(inner,text=f"      * {w.name}  |  {w.sets}x{w.reps}  |  rest {w.rest_time}s").pack(anchor="w")
 
     def log_workout(self) -> None:
-        LogWorkoutDialog(self._window, self._planner)
+        LogWorkoutDialog(self._window, self._planner, on_saved=self.view_statistics)
 
     def view_logs(self) -> None:
         for w in self._pageContent.winfo_children():
@@ -155,7 +155,6 @@ class Viewer:
 
         plans = self._planner.list_plans()
         engine = SuggestionEngine()
-
         ttk.Label(self._pageContent, text="Suggestions", font=("Helvetica", 13, "bold")).pack(pady=(20, 10))
 
         if not plans:
@@ -188,4 +187,7 @@ class Viewer:
         if not user:
             raise ValueError("No user cannot initialize Viewer")
         self._user = user
-        self._planner = Planner(user) # Critical for the entire app lol
+        # Use the same planner instance that the User holds so that any
+        # logs/plans added through the GUI are immediately reflected in all
+        # views (including statistics) without needing to reload from disk.
+        self._planner = user.get_planner()
