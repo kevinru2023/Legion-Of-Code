@@ -1,5 +1,7 @@
 # Legion-Of-Code
-The Legion Of Code CS361 group repository.
+A command-line workout and fitness planning app in Python, built by a 7-person team for **CS 361 (Software Engineering I) at Oregon State University**, Winter 2026. The project follows a full design process (use cases, UAT criteria, UML class diagrams, and activity diagrams in `design/` and `docs/`) alongside the implementation. Mirrored here from the course organization with full commit history.
+
+**My contributions (Kevin Rubio):** set up the initial `src/` project structure, separated the classes, and added the JSON data directory. I designed and implemented the `WorkoutPlan` class and its class diagram, built much of the `Planner`, `Viewer`, `Session`, and `User` logic, and authored the activity diagram (with PlantUML sources) for the rest-day suggestion test case.
 
 ## Team Members
 - Niki Pandya
